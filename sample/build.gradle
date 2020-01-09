@@ -1,0 +1,12 @@
+apply plugin: "java"
+apply plugin: "kotlin"
+apply from: rootProject.file("dependencies.gradle")
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+  implementation project(":library")
+}
+
+apply from: rootProject.file("spotless_plugin_config.gradle")
