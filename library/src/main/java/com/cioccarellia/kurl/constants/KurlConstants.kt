@@ -15,6 +15,9 @@
  */
 package com.cioccarellia.kurl.constants
 
+import com.cioccarellia.kurl.model.Method
+
 object KurlConstants {
     const val defaultProtocol = "https"
+    val defaultMethod = Method.GET
 }

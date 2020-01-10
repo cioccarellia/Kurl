@@ -16,19 +16,23 @@
 package com.cioccarellia.kurlsample
 
 import com.cioccarellia.kurl.kurl
-import com.cioccarellia.kurl.api.Api
+import com.cioccarellia.kurl.model.Method
 
-public class Main {
-
-    val baseApi = Api(
-        domain = "heaven.lucifer",
-        path = "/v1/skywalk",
-        protocol = "ftp"
-    )
+class Main {
 
     fun main() {
-        kurl(baseApi) {
-            endpoint("data")
+        val username = "AndreaCioccarelli"
+
+        val userRequest = kurl(AppContainer.rootApi) {
+            endpoint("users/$username")
+            method(Method.PUT)
+
+            parameters(
+                "id" to "23985725872",
+                "operation" to 4
+            )
         }
+
+        println(userRequest.url)
     }
 }

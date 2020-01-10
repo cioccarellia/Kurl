@@ -15,10 +15,19 @@
  */
 package com.cioccarellia.kurl
 
-import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.api.Api
+import com.cioccarellia.kurl.api.Endpoint
+import com.cioccarellia.kurl.dsl.KurlContext
+import com.cioccarellia.kurl.dsl.KurlRequest
+import com.cioccarellia.kurl.model.emptyEndpoint
 
 fun kurl(
     api: Api,
+    endpoint: Endpoint = emptyEndpoint(),
     block: KurlContext.() -> Unit
-) = KurlContext(api).apply { block() }.get()
+): KurlRequest = KurlContext(api, endpoint).apply { block() }.get()
+
+fun kurl(
+    url: String,
+    block: KurlContext.() -> Unit
+): KurlRequest = KurlContext(Api.of(url), emptyEndpoint()).apply { block() }.get()

@@ -25,7 +25,7 @@ fun String.protocol(): String? {
 }
 
 fun String.domain(): String {
-    check(isNotBlank()) {
+    require(isNotBlank()) {
         "Domain must not be blank"
     }
 

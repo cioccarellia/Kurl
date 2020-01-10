@@ -15,11 +15,16 @@
  */
 package com.cioccarellia.kurl.api
 
-import com.cioccarellia.kurl.compose.*
+import com.cioccarellia.kurl.compose.KurlComposable
 import com.cioccarellia.kurl.constants.KurlConstants
-import com.cioccarellia.kurl.extensions.*
+import com.cioccarellia.kurl.extensions.domain
+import com.cioccarellia.kurl.extensions.path
+import com.cioccarellia.kurl.extensions.port
+import com.cioccarellia.kurl.extensions.protocol
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 import com.cioccarellia.kurl.extensions.suffixIfNotEndingWith
+import com.cioccarellia.kurl.model.emptyHeaders
+import java.net.URL
 
 /**
  * Class representing an API base url.
@@ -41,13 +46,15 @@ data class Api(
     val protocol: String? = KurlConstants.defaultProtocol,
     val domain: String,
     val port: Int? = null,
-    val path: String? = null
+    val path: String? = null,
+    val persistentHeaders: Map<String, String> = emptyHeaders()
 ) : KurlComposable {
-    private constructor(url: String) : this(
+    private constructor(url: String, persistentHeaders: Map<String, String>) : this(
         url.protocol(),
         url.domain(),
         url.port(),
-        url.path()
+        url.path(),
+        persistentHeaders
     )
 
     var url = build(protocol, domain, port, path)
@@ -56,7 +63,8 @@ data class Api(
     override fun toString() = url
 
     companion object {
-        fun of(url: String) = Api(url)
+        fun of(url: String, persistentHeaders: Map<String, String> = emptyHeaders()) = Api(url, persistentHeaders.toMutableMap())
+        fun of(url: URL, persistentHeaders: Map<String, String> = emptyHeaders()) = Api(url.toString(), persistentHeaders.toMutableMap())
 
         private fun build(
             protocol: String?,
@@ -64,19 +72,21 @@ data class Api(
             port: Int?,
             path: String?
         ) = buildString {
-            check(domain.isNotBlank()) { "Domain must not be blank" }
+            require(domain.isNotBlank()) { "Domain must not be blank" }
 
             protocol?.let {
-                check(protocol.isNotBlank()) { "Can not create URL with a blank protocol. Either set it to null, take the default value or specify one." }
+                require(protocol.isNotBlank()) { "Can not create URL with a blank protocol. Either set it to null, take the default value or specify one." }
             }
 
             port?.let {
-                check(it >= 0)
+                require(it >= 0)
             }
 
-            if (!protocol.isNullOrBlank()) {
+            protocol?.let {
                 append(
-                    protocol.toLowerCase().suffixIfNotEndingWith("://")
+                    protocol
+                        .toLowerCase()
+                        .suffixIfNotEndingWith("://")
                 )
             }
 

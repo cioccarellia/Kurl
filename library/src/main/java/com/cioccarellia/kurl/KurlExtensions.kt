@@ -15,7 +15,7 @@
  */
 package com.cioccarellia.kurl
 
-import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.api.Api
+import com.cioccarellia.kurl.dsl.KurlContext
 
-fun Api.kurl(block: KurlContext.() -> Unit) = kurl(this, block)
+fun Api.kurl(block: KurlContext.() -> Unit) = kurl(api = this, block = block)

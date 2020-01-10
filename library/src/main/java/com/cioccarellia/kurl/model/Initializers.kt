@@ -13,21 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl
+package com.cioccarellia.kurl.model
 
 import com.cioccarellia.kurl.api.Endpoint
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
 
-class EndpointTests {
-
-    @Test
-    fun test1() {
-        val data = Endpoint("data")
-        val space = Endpoint("space")
-
-        val sum = data + space
-
-        assertThat(sum.path).isEqualTo("data/space")
-    }
-}
+fun emptyEndpoint() = Endpoint(relativePath = "")
+fun emptyHeaders(): Map<String, String> = mutableMapOf()

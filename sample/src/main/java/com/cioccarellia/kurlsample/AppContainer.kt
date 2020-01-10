@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl
+package com.cioccarellia.kurlsample
 
-import com.cioccarellia.kurl.api.Endpoint
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
+import com.cioccarellia.kurl.api.Api
 
-class EndpointTests {
-
-    @Test
-    fun test1() {
-        val data = Endpoint("data")
-        val space = Endpoint("space")
-
-        val sum = data + space
-
-        assertThat(sum.path).isEqualTo("data/space")
-    }
+object AppContainer {
+    val rootApi = Api.of(
+        url = "https://api.github.com",
+        persistentHeaders = mapOf(
+            "Accept" to "application/vnd.github.v3+json"
+        )
+    )
 }

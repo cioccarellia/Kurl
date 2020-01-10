@@ -13,21 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl
+package com.cioccarellia.kurl.model
 
-import com.cioccarellia.kurl.api.Endpoint
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
+data class UrlParameters(
+    var parameters: Map<String, Any> = emptyMap(),
+    var prefix: String = "?",
+    var separator: String = "&",
+    var suffix: String = ""
+) {
+    override fun toString() = parameters.toList().joinToString(
+        separator = separator,
+        prefix = prefix,
+        postfix = suffix
+    ) {
+        "${it.first}=${it.second}"
+    }
 
-class EndpointTests {
-
-    @Test
-    fun test1() {
-        val data = Endpoint("data")
-        val space = Endpoint("space")
-
-        val sum = data + space
-
-        assertThat(sum.path).isEqualTo("data/space")
+    operator fun plusAssign(other: UrlParameters) {
+        parameters += other.parameters
+        prefix = other.prefix
+        separator = other.separator
+        suffix = other.suffix
     }
 }

@@ -17,29 +17,87 @@ package com.cioccarellia.kurl.dsl
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.api.emptyEndpoint
-import com.cioccarellia.kurl.compose.Composer
+import com.cioccarellia.kurl.constants.KurlConstants
+import com.cioccarellia.kurl.model.Method
+import com.cioccarellia.kurl.model.UrlParameters
+import com.cioccarellia.kurl.model.emptyEndpoint
 
 data class KurlContext(
-    private val base: Api
+    private val api: Api,
+    private val endpoint: Endpoint = emptyEndpoint()
 ) {
-    internal constructor(baseUrl: String) : this(Api.of(baseUrl))
+    internal constructor(fullEndpoint: String) : this(Api.of(fullEndpoint))
 
-    private val endpoint = emptyEndpoint()
+    @PublishedApi
+    internal var method: Method = KurlConstants.defaultMethod
+    @PublishedApi
+    internal val headers: MutableMap<String, String> = api.persistentHeaders.toMutableMap()
+    @PublishedApi
+    internal val urlParameters = UrlParameters()
 
     @PublishedApi
     internal fun get() = KurlRequest(
-        Composer.compose(base, endpoint)
+        api.url,
+        endpoint,
+        urlParameters,
+        method,
+        headers
     )
 
-    fun endpoint(path: String): KurlContext {
-        endpoint += path
-        return this
+    fun method(method: Method): KurlContext = apply {
+        this.method = method
     }
 
-    fun endpoint(path: Endpoint): KurlContext {
+    fun endpoint(path: String): KurlContext = apply {
         endpoint += path
-        return this
     }
 
+    fun endpoint(path: Endpoint): KurlContext = apply {
+        endpoint += path
+    }
+
+    fun parameters(
+        vararg pairs: Pair<String, Any>,
+        prefix: String = "?",
+        separator: String = "&",
+        suffix: String = ""
+    ): KurlContext = parameters(pairs.toMap(), prefix, separator, suffix)
+
+    fun parameters(
+        parameters: Map<String, Any>,
+        prefix: String = "?",
+        separator: String = "&",
+        suffix: String = ""
+    ): KurlContext = apply {
+        urlParameters += UrlParameters(
+            parameters,
+            prefix,
+            separator,
+            suffix
+        )
+    }
+
+    fun header(key: String, value: String): KurlContext = apply {
+        headers[key] = value
+    }
+
+    fun header(
+        pair: Pair<String, String>
+    ): KurlContext = apply {
+        headers[pair.first] = pair.second
+    }
+
+    fun headers(vararg pairs: Pair<String, String>): KurlContext = apply {
+        pairs.forEach {
+            headers[it.first] = it.second
+        }
+    }
+
+    fun headers(headers: Map<String, String>): KurlContext = apply {
+        this.headers += headers
+    }
+
+    fun headers(list: Collection<Pair<String, String>>): KurlContext = apply {
+        headers += list
+    }
 }

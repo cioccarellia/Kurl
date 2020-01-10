@@ -16,17 +16,43 @@
 package com.cioccarellia.kurl
 
 import com.cioccarellia.kurl.api.Api
-import okhttp3.OkHttpClient
+import com.cioccarellia.kurl.model.Method
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
 
 class KurlFunctionsTest {
 
     val baseApi = Api(
         domain = "heaven.lucifer",
-        path = "/v1/skywalk",
+        path = "/v1/skywalk/",
         protocol = "ftp"
     )
 
-    fun test1() {
-        val x = OkHttpClient()
+    @Test
+    fun run() {
+        val username = "AndreaCioccarelli"
+
+        val userRequest = kurl(baseApi) {
+            endpoint("users/$username")
+            method(Method.PUT)
+
+            parameters(
+                "id" to "23985725872",
+                "operation" to 4
+            )
+        }
+
+        assertThat(
+            userRequest.url
+        ).isEqualTo("ftp://heaven.lucifer/v1/skywalk/users/AndreaCioccarelli?id=23985725872&operation=4")
+
+        assertThat(
+            kurl("localhost/www/PhpStorm") {
+                endpoint("index.php")
+                method(Method.POST)
+
+                parameters("id" to "0")
+            }.url
+        ).isEqualTo("localhost/www/PhpStorm/index.php?id=0")
     }
 }

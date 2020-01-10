@@ -20,7 +20,7 @@ import com.cioccarellia.kurl.compose.KurlComposable
 
 class Endpoint(
     relativePath: String
-): KurlComposable {
+) : KurlComposable {
     var path: String = Composer.sanitize(relativePath)
 
     override fun kurl() = path
@@ -40,5 +40,3 @@ class Endpoint(
         path = Composer.compose(kurl(), other)
     }
 }
-
-fun emptyEndpoint() = Endpoint(relativePath = "")
