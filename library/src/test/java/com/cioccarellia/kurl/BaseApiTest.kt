@@ -1,5 +1,5 @@
 /**
- * Designed and developed by Aidan Follestad (@afollestad)
+ * Designed and developed by Andrea Cioccarelli (@cioccarellia)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package com.cioccarellia.kurl
 
-import com.cioccarellia.kurl.model.BaseApi
+import com.cioccarellia.kurl.api.Api
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -23,7 +23,7 @@ class BaseApiTest {
 
     @Test fun url1() =
         assertThat(
-            BaseApi(
+            Api(
                 domain = "config.kernel.org",
                 path = ""
             ).toString()
@@ -31,7 +31,7 @@ class BaseApiTest {
 
     @Test fun url2() =
         assertThat(
-            BaseApi(
+            Api(
                 domain = "i.instagram.com",
                 path = "/api/v1/",
                 port = 80,
@@ -41,7 +41,7 @@ class BaseApiTest {
 
     @Test fun url3() =
         assertThat(
-            BaseApi(
+            Api(
                 domain = "hell.lucifer",
                 protocol = "ftp"
             ).toString()
@@ -49,14 +49,14 @@ class BaseApiTest {
 
     @Test fun url4() =
         assertThat(
-            BaseApi(
+            Api(
                 domain = "console.firebase.google.com"
             ).toString()
         ).isEqualTo("https://console.firebase.google.com")
 
     @Test fun url5() =
         assertThat(
-            BaseApi(
+            Api(
                 domain = "localhost",
                 protocol = null,
                 port = 6554
@@ -65,27 +65,26 @@ class BaseApiTest {
 
     @Test fun url6() =
         assertThat(
-            BaseApi.of("https://webstore.hook.com").toString()
+            Api.of("https://webstore.hook.com").toString()
         ).isEqualTo("https://webstore.hook.com")
 
     @Test fun url7() =
         assertThat(
-            BaseApi.of("localhost").toString()
+            Api.of("localhost").toString()
         ).isEqualTo("localhost")
 
     @Test fun url8() =
         assertThat(
-            BaseApi.of("localhost:445").toString()
+            Api.of("localhost:445").toString()
         ).isEqualTo("localhost:445")
-
 
     @Test fun url9() =
         assertThat(
-            BaseApi.of("tftp://localhost:445/UAV/deploy/custom").toString()
+            Api.of("tftp://localhost:445/UAV/deploy/custom").toString()
         ).isEqualTo("tftp://localhost:445/UAV/deploy/custom")
 
     @Test fun url10() =
         assertThat(
-            BaseApi.of("localhost/").toString()
+            Api.of("localhost/").toString()
         ).isEqualTo("localhost")
 }

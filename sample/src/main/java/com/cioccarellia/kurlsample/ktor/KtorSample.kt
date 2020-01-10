@@ -33,5 +33,4 @@ class KtorSample {
             }
         }.start(wait = true)
     }
-
 }

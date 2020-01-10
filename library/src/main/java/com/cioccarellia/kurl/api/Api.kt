@@ -1,74 +1,48 @@
 /**
  * Designed and developed by Andrea Cioccarelli (@cioccarellia)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- **/
+ */
+package com.cioccarellia.kurl.api
 
-/**
- * Designed and developed by Andrea Cioccarelli (@cioccarellia)
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *     http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- **/
-
-/**
- * Designed and developed by Andrea Cioccarelli (@cioccarellia)
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *     http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- **/
-
-package com.cioccarellia.kurl.model
-
-import com.cioccarellia.kurl.compose.domain
-import com.cioccarellia.kurl.compose.path
-import com.cioccarellia.kurl.compose.port
-import com.cioccarellia.kurl.compose.protocol
+import com.cioccarellia.kurl.compose.*
 import com.cioccarellia.kurl.constants.KurlConstants
+import com.cioccarellia.kurl.extensions.*
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 import com.cioccarellia.kurl.extensions.suffixIfNotEndingWith
 
 /**
  * Class representing an API base url.
  *
- * @param protocol  Optional parameter specifying the protocol used for communication
+ * @param protocol Optional parameter specifying the protocol used for communication
  *                  between the server and the client. By default it is set to HTTPS.
  *                  It can be either the form "https://" or "https".
  *
- * @param domain    The base domain of the website which hosts the server.
+ * @param domain The base domain of the website which hosts the server.
  *                  It has to be in the form "get.dns.cloudflare-dns.io"
  *
- * @param port      Optional parameter specifying the port the server is running on.
+ * @param port Optional parameter specifying the port the server is running on.
  *
- * @param path      Optional parameter specifying the base path to the web API root,
+ * @param path Optional parameter specifying the base path to the web API root,
  *                  which is then appended to reach the root server APIs.
  *
  * */
-data class BaseApi(
+data class Api(
     val protocol: String? = KurlConstants.defaultProtocol,
     val domain: String,
     val port: Int? = null,
     val path: String? = null
-) {
+) : KurlComposable {
     private constructor(url: String) : this(
         url.protocol(),
         url.domain(),
@@ -76,10 +50,15 @@ data class BaseApi(
         url.path()
     )
 
-    companion object {
-        fun of(url: String) = BaseApi(url)
+    var url = build(protocol, domain, port, path)
 
-        private fun join(
+    override fun kurl() = url
+    override fun toString() = url
+
+    companion object {
+        fun of(url: String) = Api(url)
+
+        private fun build(
             protocol: String?,
             domain: String,
             port: Int?,
@@ -117,9 +96,4 @@ data class BaseApi(
             }
         }
     }
-
-    val url = join(protocol, domain, port, path)
-
-    override fun toString() = url
-
 }

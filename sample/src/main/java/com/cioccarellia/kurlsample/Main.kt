@@ -16,12 +16,11 @@
 package com.cioccarellia.kurlsample
 
 import com.cioccarellia.kurl.kurl
-import com.cioccarellia.kurl.model.BaseApi
+import com.cioccarellia.kurl.api.Api
 
 public class Main {
 
-
-    val baseApi = BaseApi(
+    val baseApi = Api(
         domain = "heaven.lucifer",
         path = "/v1/skywalk",
         protocol = "ftp"
@@ -29,7 +28,7 @@ public class Main {
 
     fun main() {
         kurl(baseApi) {
-
+            endpoint("data")
         }
     }
 }
