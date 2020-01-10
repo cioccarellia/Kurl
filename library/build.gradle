@@ -10,6 +10,14 @@ apply from: rootProject.file('configure-maven-publish.gradle')
 dependencies {
   api deps.kotlin.coroutines.core
   implementation deps.kotlin.stdlib8
+  implementation deps.kotlin.reflection
+
+  api deps.gradle_plugins.ktor
+  api deps.gradle_plugins.netty
+
+  api deps.gradle_plugins.okhttp
+  api deps.gradle_plugins.retrofit
+  api deps.gradle_plugins.volley
 
   testImplementation deps.kotlin.test.mockito
   testImplementation deps.test.junit

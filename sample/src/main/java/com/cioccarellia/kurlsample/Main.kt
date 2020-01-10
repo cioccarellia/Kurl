@@ -13,3 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.cioccarellia.kurlsample
+
+import com.cioccarellia.kurl.kurl
+import com.cioccarellia.kurl.model.BaseApi
+
+public class Main {
+
+
+    val baseApi = BaseApi(
+        domain = "heaven.lucifer",
+        path = "/v1/skywalk",
+        protocol = "ftp"
+    )
+
+    fun main() {
+        kurl(baseApi) {
+
+        }
+    }
+}

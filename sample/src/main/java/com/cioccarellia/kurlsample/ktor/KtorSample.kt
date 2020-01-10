@@ -13,3 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.cioccarellia.kurlsample.ktor
+
+import io.ktor.application.call
+import io.ktor.http.ContentType
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+
+class KtorSample {
+    fun launch() {
+        embeddedServer(Netty, 8080) {
+            routing {
+                get("/") {
+                    call.respondText("My Example Blog", ContentType.Text.Html)
+                }
+            }
+        }.start(wait = true)
+    }
+
+}

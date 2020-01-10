@@ -1,5 +1,6 @@
 ext.versions = [
-    publishVersion: '1.0.0-SNAPSHOT'
+    publishVersion: '1.0.0',
+    ktorVersion: '1.2.6'
 ]
 
 ext.deps = [
@@ -8,10 +9,16 @@ ext.deps = [
         spotless: "com.diffplug.spotless:spotless-plugin-gradle:3.27.0",
         versions: "com.github.ben-manes:gradle-versions-plugin:0.27.0",
         maven_publish: "com.vanniktech:gradle-maven-publish-plugin:0.8.0",
+        netty: "io.ktor:ktor-server-netty:${versions.ktorVersion}",
+        ktor: "io.ktor:ktor-server-core:${versions.ktorVersion}",
+        okhttp: "com.squareup.okhttp3:okhttp:4.3.1",
+        retrofit: "com.squareup.retrofit2:retrofit:2.7.1",
+        volley: "com.android.volley:volley:1.1.1"
     ],
 
     kotlin: [
         stdlib8: "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+        reflection: "org.jetbrains.kotlin:kotlin-reflect",
         coroutines: [
             core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
         ],
