@@ -13,21 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl
+package com.cioccarellia.kurl.ktx.okhttp
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.dsl.KurlBuilder
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.model.emptyEndpoint
+import okhttp3.Headers.Companion.toHeaders
+import okhttp3.Request
 
-fun kurl(
+fun Request.Builder.kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit
-): KurlBuilder = KurlContext(api, endpoint).apply { block() }.get()
+    block: KurlContext.() -> Unit = {}
+): Request.Builder {
+    val request = com.cioccarellia.kurl.kurl(api, endpoint, block)
 
-fun kurl(
-    url: String,
+    request.let {
+        url(it.get())
+        headers(
+            it.headers
+            .mapValues {
+                it.value.toString()
+            }
+            .toHeaders()
+        )
+    }
+
+    return this
+}
+
+fun Request.Builder.kurl(
+    directUrl: String,
     block: KurlContext.() -> Unit
-): KurlBuilder = KurlContext(Api.direct(url), emptyEndpoint()).apply { block() }.get()
+): Request.Builder = kurl(Api.direct(directUrl), emptyEndpoint(), block)

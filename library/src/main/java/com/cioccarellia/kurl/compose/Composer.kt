@@ -19,20 +19,24 @@ import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 
 object Composer {
     fun compose(p1: String, p2: String): String {
-        return p1.removePrefixAndSuffix("/") +
-            "/" + p2.removePrefixAndSuffix("/")
+        return when {
+            p1.isEmpty() && p2.isEmpty() -> ""
+            p1.isEmpty() -> p2.removePrefixAndSuffix("/")
+            p2.isEmpty() -> p1.removePrefixAndSuffix("/")
+            else -> p1.removePrefixAndSuffix("/") + "/" + p2.removePrefixAndSuffix("/")
+        }
     }
 
     fun compose(url: String, endpoint: KurlComposable): String {
-        return compose(url, endpoint.kurl())
+        return compose(url, endpoint.url())
     }
 
     fun compose(endpoint: KurlComposable, url: String): String {
-        return compose(endpoint.kurl(), url)
+        return compose(endpoint.url(), url)
     }
 
     fun compose(p1: KurlComposable, p2: KurlComposable) =
-        compose(p1.kurl(), p2.kurl())
+        compose(p1.url(), p2.url())
 
     fun sanitize(path: String) = path.removePrefixAndSuffix("/")
 }

@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl.dsl
+package com.cioccarellia.kurl
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.compose.Composer
-import com.cioccarellia.kurl.model.UrlParameters
+import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlContext
+import com.cioccarellia.kurl.model.emptyEndpoint
 
-data class KurlBuilder(
-    val api: Api,
-    val endpoint: Endpoint,
-    val urlParameters: UrlParameters,
-    val headers: Map<String, Any>,
-    val fragment: String
-) {
-    fun get(): String = Composer.compose(api.url(), endpoint) + urlParameters.toString() + fragment
-}
+fun kurl(
+    api: Api,
+    endpoint: Endpoint = emptyEndpoint(),
+    block: KurlContext.() -> Unit = {}
+): KurlBuilder = KurlContext(api, endpoint).apply { block() }.get()
+
+fun kurl(
+    directUrl: String,
+    block: KurlContext.() -> Unit
+): KurlBuilder = KurlContext(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()

@@ -19,15 +19,27 @@ import com.cioccarellia.kurl.api.Endpoint
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class EndpointTests {
+class OperatorTests {
 
     @Test
-    fun test1() {
+    fun sumEndpoints() {
         val data = Endpoint("data")
         val space = Endpoint("space")
 
         val sum = data + space
 
-        assertThat(sum.path).isEqualTo("data/space")
+        assertThat(sum.url())
+            .isEqualTo("data/space")
+    }
+
+    @Test
+    fun sumUrlAndEndpoint() {
+        val space = Endpoint("space")
+        val data = "data"
+
+        val sum = space + data
+
+        assertThat(sum)
+            .isEqualTo("space/data")
     }
 }

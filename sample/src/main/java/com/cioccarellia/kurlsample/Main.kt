@@ -15,18 +15,39 @@
  **/
 package com.cioccarellia.kurlsample
 
+import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.kurl
 import com.cioccarellia.kurlsample.containers.GithubApiContainer
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-val client = HttpClient()
+private val client = HttpClient()
+
+private fun fetchAndPrint(url: String) = runBlocking {
+    println(
+        client.get<String>(url)
+    )
+}
 
 fun main() {
+    fetchUsingNamedAndExtensionApi()
     fetchUsingInline()
     fetchUsingContainers()
+}
+
+fun fetchUsingNamedAndExtensionApi() {
+    val api = Api(
+        domain = "api.github.com"
+    )
+
+    val username = "AndreaCioccarelli"
+
+    fetchAndPrint(
+        api.kurl {
+            endpoint("users/$username/repos")
+        }.get()
+    )
 }
 
 fun fetchUsingInline() = runBlocking {
@@ -52,15 +73,9 @@ fun fetchUsingContainers() {
     val username = "AndreaCioccarelli"
     val container = GithubApiContainer(username)
 
-    runBlocking {
-        val repos = async {
-            client.get<String>(
-                container
-                    .repoEndpoint(page = 1)
-                    .get()
-            )
-        }
-
-        println(repos.await())
-    }
+    fetchAndPrint(
+        container
+            .repoEndpoint(page = 1)
+            .get()
+    )
 }

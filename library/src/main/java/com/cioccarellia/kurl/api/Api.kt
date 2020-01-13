@@ -47,26 +47,23 @@ data class Api(
     val domain: String,
     val port: Int? = null,
     val path: String? = null,
-    val persistentHeaders: Map<String, String> = emptyHeaders()
+    val persistentHeaders: Map<String, Any> = emptyHeaders()
 ) : KurlComposable {
 
     @PublishedApi internal constructor(
         url: String,
-        persistentHeaders: Map<String, String>
+        persistentHeaders: Map<String, Any>
     ) : this(
-        url.protocol(),
-        url.domain(),
-        url.port(),
-        url.path(),
-        persistentHeaders
+        protocol = url.protocol(),
+        domain = url.domain(),
+        port = url.port(),
+        path = url.path(),
+        persistentHeaders = persistentHeaders
     )
 
-    /**
-     * wgfweg
-     * */
     var url = build(protocol, domain, port, path)
 
-    override fun kurl() = url
+    override fun url() = url
     override fun toString() = url
 
     companion object {
@@ -75,12 +72,12 @@ data class Api(
          * */
         fun direct(
             url: String,
-            persistentHeaders: Map<String, String> = emptyHeaders()
+            persistentHeaders: Map<String, Any> = emptyHeaders()
         ) = Api(url, persistentHeaders.toMutableMap())
 
         fun direct(
             url: URL,
-            persistentHeaders: Map<String, String> = emptyHeaders()
+            persistentHeaders: Map<String, Any> = emptyHeaders()
         ) = Api(url.toString(), persistentHeaders.toMutableMap())
 
         private fun build(
@@ -89,15 +86,25 @@ data class Api(
             port: Int?,
             path: String?
         ) = buildString {
-            require(domain.isNotBlank()) { "Domain must not be blank" }
+            require(domain.isNotBlank()) {
+                "The domain field must not be blank"
+            }
+
+            require(!domain.contains("://")) {
+                "Must not include protocol inside domain ($domain)"
+            }
+
+            require(!domain.contains("/")) {
+                "Must not include API web path inside domain, specify it into the 'path' field"
+            }
 
             protocol?.let {
-                require(protocol.isNotBlank()) { "Can not create URL with a blank protocol. Either set it to null, take the default value or specify one." }
+                require(protocol.isNotBlank()) {
+                    "Can not silently create a URL with a blank protocol. Either set it to null, take the default value (https) or specify one."
+                }
             }
 
-            port?.let {
-                require(it >= 0)
-            }
+            port?.let { require(it >= 0) }
 
             protocol?.let {
                 append(

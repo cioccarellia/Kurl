@@ -13,6 +13,7 @@ dependencies {
   api deps.kotlin.coroutines.core
   implementation deps.kotlin.stdlib8
   implementation deps.kotlin.reflection
+  implementation deps.gradle_plugins.okhttp
 
   testImplementation deps.kotlin.test.mockito
   testImplementation deps.test.junit

@@ -18,7 +18,7 @@ package com.cioccarellia.kurl.extensions
 fun String.protocol(default: String? = null): String? {
     return when {
         contains("://") -> {
-            split("://")[0]
+            split("://")[0].toLowerCase()
         }
         else -> default
     }

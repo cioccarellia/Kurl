@@ -13,6 +13,9 @@ dependencies {
   implementation deps.kotlin.stdlib8
   implementation deps.kotlin.reflection
 
+  implementation deps.gradle_plugins.ktor_client
+  implementation deps.gradle_plugins.ktor_engine_apache
+
   testImplementation deps.kotlin.test.mockito
   testImplementation deps.test.junit
   testImplementation deps.test.mockito

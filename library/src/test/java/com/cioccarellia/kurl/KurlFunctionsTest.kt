@@ -27,7 +27,8 @@ class KurlFunctionsTest {
         protocol = "htp"
     )
 
-    @Test fun runKurlWithApi() {
+    @Test
+    fun runKurlWithApi() {
         val username = "AndreaCioccarelli"
 
         val userRequest = kurl(baseApi) {
@@ -45,7 +46,8 @@ class KurlFunctionsTest {
 
     }
 
-    @Test fun runDirectKurl() {
+    @Test
+    fun runDirectKurl() {
         val url = kurl("localhost/www") {
             endpoint("index.php")
 
@@ -58,7 +60,17 @@ class KurlFunctionsTest {
     }
 
 
-    @Test fun runExtensionKurl() {
+    @Test
+    fun runDirectKurlLocalhost() {
+        val url = kurl("localhost") {}.get()
+
+        assertThat(
+            url
+        ).isEqualTo("localhost")
+    }
+
+    @Test 
+    fun runExtensionKurl() {
         val url = baseApi.kurl {
             endpoint("index.php")
 

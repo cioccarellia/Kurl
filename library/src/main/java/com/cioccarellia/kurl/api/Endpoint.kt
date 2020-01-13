@@ -21,22 +21,26 @@ import com.cioccarellia.kurl.compose.KurlComposable
 class Endpoint(
     relativePath: String
 ) : KurlComposable {
-    var path: String = Composer.sanitize(relativePath)
+    private var path: String = Composer.sanitize(relativePath)
 
-    override fun kurl() = path
+    override fun url() = path
     override fun toString() = path
 
-    operator fun plus(other: Endpoint): Endpoint {
+    operator fun plus(other: KurlComposable): Endpoint {
         return Endpoint(
-            Composer.compose(kurl(), other)
+            Composer.compose(url(), other)
         )
     }
 
-    operator fun plusAssign(other: Endpoint) {
-        path = Composer.compose(kurl(), other)
+    operator fun plus(other: String): String {
+        return Composer.compose(this, other)
+    }
+
+    operator fun plusAssign(other: KurlComposable) {
+        path = Composer.compose(url(), other)
     }
 
     operator fun plusAssign(other: String) {
-        path = Composer.compose(kurl(), other)
+        path = Composer.compose(url(), other)
     }
 }

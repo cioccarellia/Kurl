@@ -34,10 +34,11 @@ data class KurlContext @PublishedApi internal constructor(
         fullEndpoint: String
     ) : this(Api.direct(fullEndpoint))
 
-    @PublishedApi internal val headers: MutableMap<String, String> = api.persistentHeaders.toMutableMap()
+    @PublishedApi internal val headers: MutableMap<String, Any> = api.persistentHeaders.toMutableMap()
     @PublishedApi internal val urlParameters = UrlParameters()
+    @PublishedApi internal var fragment = ""
 
-    @PublishedApi internal fun get() = KurlBuilder(api, endpoint, urlParameters, headers)
+    @PublishedApi internal fun get() = KurlBuilder(api, endpoint, urlParameters, headers, fragment)
 
     fun endpoint(
         path: String
@@ -82,19 +83,19 @@ data class KurlContext @PublishedApi internal constructor(
 
     fun header(
         key: String,
-        value: String
+        value: Any
     ): KurlContext = apply {
         headers[key] = value
     }
 
     fun header(
-        pair: Pair<String, String>
+        pair: Pair<String, Any>
     ): KurlContext = apply {
         headers[pair.first] = pair.second
     }
 
     fun headers(
-        vararg pairs: Pair<String, String>
+        vararg pairs: Pair<String, Any>
     ): KurlContext = apply {
         pairs.forEach {
             headers[it.first] = it.second
@@ -102,14 +103,24 @@ data class KurlContext @PublishedApi internal constructor(
     }
 
     fun headers(
-        headers: Map<String, String>
+        headers: Map<String, Any>
     ): KurlContext = apply {
         this.headers += headers
     }
 
     fun headers(
-        list: Collection<Pair<String, String>>
+        list: Collection<Pair<String, Any>>
     ): KurlContext = apply {
         headers += list
+    }
+
+    fun fragment(
+        fragment: String
+    ) = apply {
+        this.fragment = if (fragment.startsWith("#")) {
+            fragment
+        } else {
+            "#$fragment"
+        }
     }
 }
