@@ -13,19 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl.dsl
-
-import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.compose.Composer
-import com.cioccarellia.kurl.model.Method
-import com.cioccarellia.kurl.model.UrlParameters
-
-data class KurlRequest(
-    @PublishedApi internal val apiUrl: String,
-    @PublishedApi internal val endpoint: Endpoint,
-    @PublishedApi internal val urlParameters: UrlParameters,
-    @PublishedApi internal val method: Method,
-    @PublishedApi internal val headers: Map<String, String>
-) {
-    val url: String = Composer.compose(apiUrl, endpoint) + urlParameters.toString()
-}
+package com.cioccarellia.kurl.ktx

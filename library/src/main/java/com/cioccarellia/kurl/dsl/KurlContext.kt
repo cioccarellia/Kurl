@@ -22,22 +22,18 @@ import com.cioccarellia.kurl.model.Method
 import com.cioccarellia.kurl.model.UrlParameters
 import com.cioccarellia.kurl.model.emptyEndpoint
 
-data class KurlContext(
+data class KurlContext @PublishedApi internal constructor(
     private val api: Api,
     private val endpoint: Endpoint = emptyEndpoint()
 ) {
-    internal constructor(fullEndpoint: String) : this(Api.of(fullEndpoint))
+    @PublishedApi internal constructor(fullEndpoint: String) : this(Api.of(fullEndpoint))
 
-    @PublishedApi
-    internal var method: Method = KurlConstants.defaultMethod
-    @PublishedApi
-    internal val headers: MutableMap<String, String> = api.persistentHeaders.toMutableMap()
-    @PublishedApi
-    internal val urlParameters = UrlParameters()
+    @PublishedApi internal var method: Method = KurlConstants.defaultMethod
+    @PublishedApi internal val headers: MutableMap<String, String> = api.persistentHeaders.toMutableMap()
+    @PublishedApi internal val urlParameters = UrlParameters()
 
-    @PublishedApi
-    internal fun get() = KurlRequest(
-        api.url,
+    @PublishedApi internal fun get() = KurlRequest(
+        api.kurl(),
         endpoint,
         urlParameters,
         method,

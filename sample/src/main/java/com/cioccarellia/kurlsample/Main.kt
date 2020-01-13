@@ -15,6 +15,7 @@
  */
 package com.cioccarellia.kurlsample
 
+import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.kurl
 import com.cioccarellia.kurl.model.Method
 
