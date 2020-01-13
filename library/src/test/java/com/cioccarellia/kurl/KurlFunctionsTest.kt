@@ -16,25 +16,22 @@
 package com.cioccarellia.kurl
 
 import com.cioccarellia.kurl.api.Api
-import com.cioccarellia.kurl.model.Method
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class KurlFunctionsTest {
 
-    val baseApi = Api(
+    private val baseApi = Api(
         domain = "heaven.lucifer",
-        path = "/v1/skywalk/",
-        protocol = "ftp"
+        path = "/v2/elevator/",
+        protocol = "htp"
     )
 
-    @Test
-    fun run() {
+    @Test fun runKurlWithApi() {
         val username = "AndreaCioccarelli"
 
         val userRequest = kurl(baseApi) {
             endpoint("users/$username")
-            method(Method.PUT)
 
             parameters(
                 "id" to "23985725872",
@@ -43,16 +40,33 @@ class KurlFunctionsTest {
         }
 
         assertThat(
-            userRequest.url
-        ).isEqualTo("ftp://heaven.lucifer/v1/skywalk/users/AndreaCioccarelli?id=23985725872&operation=4")
+            userRequest.get()
+        ).isEqualTo("htp://heaven.lucifer/v2/elevator/users/AndreaCioccarelli?id=23985725872&operation=4")
+
+    }
+
+    @Test fun runDirectKurl() {
+        val url = kurl("localhost/www") {
+            endpoint("index.php")
+
+            parameters("id" to "0")
+        }.get()
 
         assertThat(
-            kurl("localhost/www/PhpStorm") {
-                endpoint("index.php")
-                method(Method.POST)
+            url
+        ).isEqualTo("localhost/www/index.php?id=0")
+    }
 
-                parameters("id" to "0")
-            }.url
-        ).isEqualTo("localhost/www/PhpStorm/index.php?id=0")
+
+    @Test fun runExtensionKurl() {
+        val url = baseApi.kurl {
+            endpoint("index.php")
+
+            parameters("id" to 0)
+        }.get()
+
+        assertThat(
+            url
+        ).isEqualTo("htp://heaven.lucifer/v2/elevator/index.php?id=0")
     }
 }

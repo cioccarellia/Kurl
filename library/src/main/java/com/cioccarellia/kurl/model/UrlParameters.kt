@@ -21,12 +21,15 @@ data class UrlParameters(
     var separator: String = "&",
     var suffix: String = ""
 ) {
-    override fun toString() = parameters.toList().joinToString(
-        separator = separator,
-        prefix = prefix,
-        postfix = suffix
-    ) {
-        "${it.first}=${it.second}"
+    override fun toString() = when {
+        parameters.isEmpty() -> ""
+        else -> parameters.toList().joinToString(
+            separator = separator,
+            prefix = prefix,
+            postfix = suffix
+        ) {
+            "${it.first}=${it.second}"
+        }
     }
 
     operator fun plusAssign(other: UrlParameters) {

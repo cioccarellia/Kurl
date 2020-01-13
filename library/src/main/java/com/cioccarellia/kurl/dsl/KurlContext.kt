@@ -17,8 +17,7 @@ package com.cioccarellia.kurl.dsl
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.constants.KurlConstants
-import com.cioccarellia.kurl.model.Method
+import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.model.UrlParameters
 import com.cioccarellia.kurl.model.emptyEndpoint
 
@@ -26,29 +25,29 @@ data class KurlContext @PublishedApi internal constructor(
     private val api: Api,
     private val endpoint: Endpoint = emptyEndpoint()
 ) {
-    @PublishedApi internal constructor(fullEndpoint: String) : this(Api.of(fullEndpoint))
+    @PublishedApi internal constructor(
+        apiContainer: KurlApiContainer,
+        endpoint: Endpoint = emptyEndpoint()
+    ) : this(apiContainer.api, endpoint)
 
-    @PublishedApi internal var method: Method = KurlConstants.defaultMethod
+    @PublishedApi internal constructor(
+        fullEndpoint: String
+    ) : this(Api.direct(fullEndpoint))
+
     @PublishedApi internal val headers: MutableMap<String, String> = api.persistentHeaders.toMutableMap()
     @PublishedApi internal val urlParameters = UrlParameters()
 
-    @PublishedApi internal fun get() = KurlRequest(
-        api.kurl(),
-        endpoint,
-        urlParameters,
-        method,
-        headers
-    )
+    @PublishedApi internal fun get() = KurlBuilder(api, endpoint, urlParameters, headers)
 
-    fun method(method: Method): KurlContext = apply {
-        this.method = method
-    }
-
-    fun endpoint(path: String): KurlContext = apply {
+    fun endpoint(
+        path: String
+    ): KurlContext = apply {
         endpoint += path
     }
 
-    fun endpoint(path: Endpoint): KurlContext = apply {
+    fun endpoint(
+        path: Endpoint
+    ): KurlContext = apply {
         endpoint += path
     }
 
@@ -65,15 +64,26 @@ data class KurlContext @PublishedApi internal constructor(
         separator: String = "&",
         suffix: String = ""
     ): KurlContext = apply {
-        urlParameters += UrlParameters(
-            parameters,
-            prefix,
-            separator,
-            suffix
+        parameters(
+            UrlParameters(
+                parameters,
+                prefix,
+                separator,
+                suffix
+            )
         )
     }
 
-    fun header(key: String, value: String): KurlContext = apply {
+    fun parameters(
+        parameters: UrlParameters
+    ): KurlContext = apply {
+        urlParameters += parameters
+    }
+
+    fun header(
+        key: String,
+        value: String
+    ): KurlContext = apply {
         headers[key] = value
     }
 
@@ -83,17 +93,23 @@ data class KurlContext @PublishedApi internal constructor(
         headers[pair.first] = pair.second
     }
 
-    fun headers(vararg pairs: Pair<String, String>): KurlContext = apply {
+    fun headers(
+        vararg pairs: Pair<String, String>
+    ): KurlContext = apply {
         pairs.forEach {
             headers[it.first] = it.second
         }
     }
 
-    fun headers(headers: Map<String, String>): KurlContext = apply {
+    fun headers(
+        headers: Map<String, String>
+    ): KurlContext = apply {
         this.headers += headers
     }
 
-    fun headers(list: Collection<Pair<String, String>>): KurlContext = apply {
+    fun headers(
+        list: Collection<Pair<String, String>>
+    ): KurlContext = apply {
         headers += list
     }
 }

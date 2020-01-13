@@ -49,7 +49,11 @@ data class Api(
     val path: String? = null,
     val persistentHeaders: Map<String, String> = emptyHeaders()
 ) : KurlComposable {
-    private constructor(url: String, persistentHeaders: Map<String, String>) : this(
+
+    @PublishedApi internal constructor(
+        url: String,
+        persistentHeaders: Map<String, String>
+    ) : this(
         url.protocol(),
         url.domain(),
         url.port(),
@@ -57,14 +61,27 @@ data class Api(
         persistentHeaders
     )
 
+    /**
+     * wgfweg
+     * */
     var url = build(protocol, domain, port, path)
 
     override fun kurl() = url
     override fun toString() = url
 
     companion object {
-        fun of(url: String, persistentHeaders: Map<String, String> = emptyHeaders()) = Api(url, persistentHeaders.toMutableMap())
-        fun of(url: URL, persistentHeaders: Map<String, String> = emptyHeaders()) = Api(url.toString(), persistentHeaders.toMutableMap())
+        /**
+         * Direct
+         * */
+        fun direct(
+            url: String,
+            persistentHeaders: Map<String, String> = emptyHeaders()
+        ) = Api(url, persistentHeaders.toMutableMap())
+
+        fun direct(
+            url: URL,
+            persistentHeaders: Map<String, String> = emptyHeaders()
+        ) = Api(url.toString(), persistentHeaders.toMutableMap())
 
         private fun build(
             protocol: String?,

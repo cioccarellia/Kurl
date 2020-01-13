@@ -15,12 +15,12 @@
  */
 package com.cioccarellia.kurl.extensions
 
-fun String.protocol(): String? {
+fun String.protocol(default: String? = null): String? {
     return when {
         contains("://") -> {
             split("://")[0]
         }
-        else -> null
+        else -> default
     }
 }
 

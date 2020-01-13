@@ -7,8 +7,11 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
   implementation project(":library")
-  implementation deps.gradle_plugins.ktor
+  implementation project(":ktx-ktor")
+  implementation project(":ktx-okhttp")
+
+  implementation deps.gradle_plugins.ktor_server
+  implementation deps.gradle_plugins.ktor_client
+  implementation deps.gradle_plugins.ktor_engine_apache
   implementation deps.gradle_plugins.netty
 }
-
-apply from: rootProject.file("spotless_plugin_config.gradle")

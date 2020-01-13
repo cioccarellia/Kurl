@@ -3,8 +3,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
  *
+ * You may obtain a copy of the License at
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,28 +12,55 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.cioccarellia.kurlsample
 
-import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.kurl
-import com.cioccarellia.kurl.model.Method
+import com.cioccarellia.kurlsample.containers.GithubApiContainer
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
-class Main {
+val client = HttpClient()
 
-    fun main() {
-        val username = "AndreaCioccarelli"
+fun main() {
+    fetchUsingInline()
+    fetchUsingContainers()
+}
 
-        val userRequest = kurl(AppContainer.rootApi) {
-            endpoint("users/$username")
-            method(Method.PUT)
+fun fetchUsingInline() = runBlocking {
+    val url = kurl("https://api.github.com") {
+        endpoint("users/AndreaCioccarelli")
+    }.get()
 
-            parameters(
-                "id" to "23985725872",
-                "operation" to 4
+    println(url)
+
+    val result = client.get<String>(
+        url
+    )
+
+    println(result)
+}
+
+fun fetchUsingContainers() {
+    /**
+     * Composes a request using a custom Kurl Container,
+     * fetches a user info and repo pages and prints out
+     * the API response
+     * */
+    val username = "AndreaCioccarelli"
+    val container = GithubApiContainer(username)
+
+    runBlocking {
+        val repos = async {
+            client.get<String>(
+                container
+                    .repoEndpoint(page = 1)
+                    .get()
             )
         }
 
-        println(userRequest.url)
+        println(repos.await())
     }
 }

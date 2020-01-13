@@ -1,2 +1,4 @@
-include ':library', ':ktx', ':sample'
+include ':library', ':sample'
+include ':ktx-okhttp', ':ktx-ktor'
+
 rootProject.name = 'Kurl'

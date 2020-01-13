@@ -13,9 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl.model
-
-import com.cioccarellia.kurl.api.Endpoint
-
-fun emptyEndpoint() = Endpoint(relativePath = "")
-fun emptyHeaders(): Map<String, String> = mutableMapOf()
+package com.cioccarellia.kurl.ktx.okhttp

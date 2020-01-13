@@ -13,9 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl.model
+package com.cioccarellia.kurl.dsl
 
+import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
+import com.cioccarellia.kurl.compose.Composer
+import com.cioccarellia.kurl.model.UrlParameters
 
-fun emptyEndpoint() = Endpoint(relativePath = "")
-fun emptyHeaders(): Map<String, String> = mutableMapOf()
+data class KurlBuilder(
+    @PublishedApi internal val api: Api,
+    @PublishedApi internal val endpoint: Endpoint,
+    @PublishedApi internal val urlParameters: UrlParameters,
+    @PublishedApi internal val headers: Map<String, String>
+) {
+    fun get(): String = Composer.compose(api.kurl(), endpoint) + urlParameters.toString()
+}

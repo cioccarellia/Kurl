@@ -23,8 +23,7 @@ mavenPublish {
 private def getBintrayRepositoryUrl() {
   def packageName = POM_ARTIFACT_ID
   if (packageName == null || packageName.isEmpty()) {
-    throw Exception(
-        "You must set POM_ARTIFACT_ID in each publishable module's gradle.properties file.")
+    throw Exception("You must set POM_ARTIFACT_ID in each publishable module's gradle.properties file.")
   }
   def (user, _) = getUserAndApiKey()
   if (user == null || user.isEmpty()) {
