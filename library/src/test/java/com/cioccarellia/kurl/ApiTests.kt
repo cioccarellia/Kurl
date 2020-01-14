@@ -47,6 +47,26 @@ class ApiTests {
             ).toString()
         ).isEqualTo("ftp://hell.lucifer")
 
+
+    @Test fun testBlankApiDomain() =
+        assertThat(
+            kotlin.runCatching {
+                Api(
+                    domain = "  ",
+                    protocol = "mk"
+                ).toString()
+            }.isFailure
+        ).isTrue()
+
+    @Test fun testJoinedApiAndPath() =
+        assertThat(
+            kotlin.runCatching {
+                Api(
+                    domain = "mk.com/api/v1"
+                ).toString()
+            }.isFailure
+        ).isTrue()
+
     @Test fun testDomainOnly() =
         assertThat(
             Api(

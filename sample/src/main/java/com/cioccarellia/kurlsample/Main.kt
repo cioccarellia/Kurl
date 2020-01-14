@@ -25,9 +25,7 @@ import kotlinx.coroutines.runBlocking
 private val client = HttpClient()
 
 private fun fetchAndPrint(url: String) = runBlocking {
-    println(
-        client.get<String>(url)
-    )
+    println(client.get<String>(url))
 }
 
 fun main() {

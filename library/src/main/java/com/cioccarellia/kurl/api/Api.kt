@@ -95,7 +95,7 @@ data class Api(
             }
 
             require(!domain.contains("/")) {
-                "Must not include API web path inside domain, specify it into the 'path' field"
+                "Must not include API web path inside domain ($domain), you can specify it into the 'path' field"
             }
 
             protocol?.let {
