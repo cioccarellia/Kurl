@@ -17,6 +17,7 @@ package com.cioccarellia.kurl.ktx.okhttp
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
+import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.model.emptyEndpoint
 import okhttp3.Headers.Companion.toHeaders
@@ -44,6 +45,13 @@ fun Request.Builder.kurl(
 }
 
 fun Request.Builder.kurl(
+    container: KurlApiContainer,
+    endpoint: Endpoint = emptyEndpoint(),
+    block: KurlContext.() -> Unit = {}
+): Request.Builder = kurl(container.api, endpoint, block)
+
+fun Request.Builder.kurl(
     directUrl: String,
     block: KurlContext.() -> Unit
 ): Request.Builder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
+

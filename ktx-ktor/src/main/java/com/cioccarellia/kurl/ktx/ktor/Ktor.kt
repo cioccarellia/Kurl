@@ -17,6 +17,7 @@ package com.cioccarellia.kurl.ktx.ktor
 
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
+import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.compose.Composer
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.ktx.ktor.extensions.toKtorProtocol
@@ -31,7 +32,7 @@ import io.ktor.http.URLProtocol
 
 fun HttpRequestBuilder.kurl(
     api: Api,
-    endpoint: Endpoint = com.cioccarellia.kurl.model.emptyEndpoint(),
+    endpoint: Endpoint = emptyEndpoint(),
     block: KurlContext.() -> Unit = {}
 ): HttpRequestBuilder {
     val kurlRequest = com.cioccarellia.kurl.kurl(api, endpoint, block)
@@ -61,6 +62,12 @@ fun HttpRequestBuilder.kurl(
 
     return this
 }
+
+fun HttpRequestBuilder.kurl(
+    container: KurlApiContainer,
+    endpoint: Endpoint = emptyEndpoint(),
+    block: KurlContext.() -> Unit = {}
+): HttpRequestBuilder = kurl(container.api, endpoint, block)
 
 fun HttpRequestBuilder.kurl(
     directUrl: String,
