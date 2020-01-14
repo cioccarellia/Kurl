@@ -25,7 +25,8 @@ ext.deps = [
         ],
         test: [
             mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
-        ]
+        ],
+        dokka: "org.jetbrains.dokka:dokka-gradle-plugin:0.10.0"
     ],
 
     test: [

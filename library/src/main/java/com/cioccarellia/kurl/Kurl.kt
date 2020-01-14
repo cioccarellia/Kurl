@@ -21,6 +21,9 @@ import com.cioccarellia.kurl.dsl.KurlBuilder
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.model.emptyEndpoint
 
+/**
+ * Test doc
+ * */
 fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
