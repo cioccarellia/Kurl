@@ -19,8 +19,8 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.dsl.KurlContext
+import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
 import com.cioccarellia.kurl.model.emptyEndpoint
-import okhttp3.Headers.Companion.toHeaders
 import okhttp3.Request
 
 fun Request.Builder.kurl(
@@ -32,13 +32,7 @@ fun Request.Builder.kurl(
 
     request.let {
         url(it.get())
-        headers(
-            it.headers
-            .mapValues {
-                it.value.toString()
-            }
-            .toHeaders()
-        )
+        headers(it.headers.toOkHttpHeaders())
     }
 
     return this
@@ -54,4 +48,3 @@ fun Request.Builder.kurl(
     directUrl: String,
     block: KurlContext.() -> Unit
 ): Request.Builder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
-
