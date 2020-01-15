@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cioccarellia.kurl.model
+package com.cioccarellia.kurl.dsl
 
 data class UrlParameters(
     var parameters: Map<String, Any> = emptyMap(),

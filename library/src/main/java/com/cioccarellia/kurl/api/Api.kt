@@ -23,7 +23,7 @@ import com.cioccarellia.kurl.extensions.port
 import com.cioccarellia.kurl.extensions.protocol
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 import com.cioccarellia.kurl.extensions.suffixIfNotEndingWith
-import com.cioccarellia.kurl.model.emptyHeaders
+import com.cioccarellia.kurl.emptyHeaders
 import java.net.URL
 
 /**

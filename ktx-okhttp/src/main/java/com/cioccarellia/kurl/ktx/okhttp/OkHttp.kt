@@ -20,7 +20,7 @@ import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
-import com.cioccarellia.kurl.model.emptyEndpoint
+import com.cioccarellia.kurl.emptyEndpoint
 import okhttp3.Request
 
 fun Request.Builder.kurl(

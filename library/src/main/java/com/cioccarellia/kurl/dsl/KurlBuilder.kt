@@ -18,7 +18,6 @@ package com.cioccarellia.kurl.dsl
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.compose.Composer
-import com.cioccarellia.kurl.model.UrlParameters
 
 data class KurlBuilder(
     val api: Api,

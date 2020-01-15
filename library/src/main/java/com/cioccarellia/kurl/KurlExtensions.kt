@@ -19,28 +19,26 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.dsl.KurlBuilder
-import com.cioccarellia.kurl.dsl.KurlContext
-import com.cioccarellia.kurl.model.emptyEndpoint
 
 fun Api.kurl(
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit
+    block: KurlInit
 ): KurlBuilder = kurl(this, endpoint = endpoint, block = block)
 
 fun Api.kurl(
     directUrl: String,
-    block: KurlContext.() -> Unit
+    block: KurlInit
 ): KurlBuilder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
 
 
 fun KurlApiContainer.kurl(
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit
+    block: KurlInit
 ): KurlBuilder = kurl(api, endpoint = endpoint, block = block)
 
 fun KurlApiContainer.kurl(
     directUrl: String,
-    block: KurlContext.() -> Unit
+    block: KurlInit
 ): KurlBuilder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
 
 

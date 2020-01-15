@@ -19,18 +19,14 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.dsl.KurlBuilder
 import com.cioccarellia.kurl.dsl.KurlContext
-import com.cioccarellia.kurl.model.emptyEndpoint
 
-/**
- * Test doc
- * */
 fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit = {}
+    block: KurlInit = {}
 ): KurlBuilder = KurlContext(api, endpoint).apply { block() }.get()
 
 fun kurl(
     directUrl: String,
-    block: KurlContext.() -> Unit
+    block: KurlInit
 ): KurlBuilder = KurlContext(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()

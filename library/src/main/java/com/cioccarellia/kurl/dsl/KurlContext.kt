@@ -18,8 +18,7 @@ package com.cioccarellia.kurl.dsl
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.model.UrlParameters
-import com.cioccarellia.kurl.model.emptyEndpoint
+import com.cioccarellia.kurl.emptyEndpoint
 
 data class KurlContext @PublishedApi internal constructor(
     private val api: Api,

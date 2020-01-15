@@ -22,7 +22,7 @@ import com.cioccarellia.kurl.compose.Composer
 import com.cioccarellia.kurl.dsl.KurlContext
 import com.cioccarellia.kurl.ktx.ktor.extensions.toKtorProtocol
 import com.cioccarellia.kurl.ktx.ktor.extensions.toStringOrEmpty
-import com.cioccarellia.kurl.model.emptyEndpoint
+import com.cioccarellia.kurl.emptyEndpoint
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.headers
