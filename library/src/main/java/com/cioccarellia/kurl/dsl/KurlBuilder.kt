@@ -15,13 +15,18 @@
  **/
 package com.cioccarellia.kurl.dsl
 
+import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.compose.Composer
 
 /**
- * Result class deriving from the launch of a Kurl function
+ * Output class representing the high level interface for
+ * importing/exporting request data, derived from the
+ * execution of a [kurl launcher][KurlLauncher] function.
  *
+ * All the processed fields are final, thus the exact representation
+ * of what the real URL the calling software is referring to, in Kurl syntax.
  * */
 data class KurlBuilder @PublishedApi internal constructor(
     val api: Api,
@@ -30,6 +35,9 @@ data class KurlBuilder @PublishedApi internal constructor(
     val headers: Map<String, Any>,
     val fragment: String
 ) {
+    /**
+     * Returns the URL of the request
+     * */
     fun get(): String = buildString {
         append(
             Composer.compose(api.url(), endpoint)
@@ -38,4 +46,6 @@ data class KurlBuilder @PublishedApi internal constructor(
         append(urlParameters.toString())
         append(fragment)
     }
+
+    override fun toString() = get()
 }

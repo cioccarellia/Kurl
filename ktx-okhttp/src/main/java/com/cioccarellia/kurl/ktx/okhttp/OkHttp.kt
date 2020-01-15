@@ -27,7 +27,7 @@ import okhttp3.Request
 /**
  * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
  * The passed lambda is applied to the Kurl construction [scope][KurlScope]
- * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ * along with the supplied parameters, and the result can then be converted into an [OkHttp Request][Request].
  *
  * @param       api         The actual base web API endpoint to use
  *                          as root of the request
@@ -52,7 +52,7 @@ fun Request.Builder.kurl(
 /**
  * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
  * The passed lambda is applied to the Kurl construction [scope][KurlScope]
- * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ * along with the supplied parameters, and the result can be converted into an [OkHttp Request][Request].
  *
  * @param       container   The actual base web API [container][KurlApiContainer] to use
  *                          as root of the request
@@ -68,7 +68,7 @@ fun Request.Builder.kurl(
 /**
  * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
  * The passed lambda is applied to the Kurl construction [scope][KurlScope]
- * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ * along with the supplied parameters, and the result can be converted into an [OkHttp Request][Request].
  *
  * @param       directUrl   The URL where the request is headed at.
  *                          This sticks together the base web API and
