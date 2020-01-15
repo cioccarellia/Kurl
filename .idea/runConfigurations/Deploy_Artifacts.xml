@@ -1,17 +1,15 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Dokka" type="GradleRunConfiguration" factoryName="Gradle" singleton="false">
+  <configuration default="false" name="Deploy Artifacts" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="" />
+      <option name="scriptParameters" value="clean build test uploadArtifacts --no-parallel --no-daemon" />
       <option name="taskDescriptions">
         <list />
       </option>
       <option name="taskNames">
-        <list>
-          <option value="dokka" />
-        </list>
+        <list />
       </option>
       <option name="vmOptions" value="" />
     </ExternalSystemSettings>

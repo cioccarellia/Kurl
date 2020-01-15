@@ -3,8 +3,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
  *
+ * You may obtain a copy of the License at
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.cioccarellia.kurl.dsl
 
 import com.cioccarellia.kurl.api.Api
@@ -20,7 +20,7 @@ import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.emptyEndpoint
 
-data class KurlContext @PublishedApi internal constructor(
+data class KurlScope @PublishedApi internal constructor(
     private val api: Api,
     private val endpoint: Endpoint = emptyEndpoint()
 ) {
@@ -41,13 +41,13 @@ data class KurlContext @PublishedApi internal constructor(
 
     fun endpoint(
         path: String
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         endpoint += path
     }
 
     fun endpoint(
         path: Endpoint
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         endpoint += path
     }
 
@@ -56,14 +56,14 @@ data class KurlContext @PublishedApi internal constructor(
         prefix: String = "?",
         separator: String = "&",
         suffix: String = ""
-    ): KurlContext = parameters(pairs.toMap(), prefix, separator, suffix)
+    ): KurlScope = parameters(pairs.toMap(), prefix, separator, suffix)
 
     fun parameters(
         parameters: Map<String, Any>,
         prefix: String = "?",
         separator: String = "&",
         suffix: String = ""
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         parameters(
             UrlParameters(
                 parameters,
@@ -76,26 +76,26 @@ data class KurlContext @PublishedApi internal constructor(
 
     fun parameters(
         parameters: UrlParameters
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         urlParameters += parameters
     }
 
     fun header(
         key: String,
         value: Any
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         headers[key] = value
     }
 
     fun header(
         pair: Pair<String, Any>
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         headers[pair.first] = pair.second
     }
 
     fun headers(
         vararg pairs: Pair<String, Any>
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         pairs.forEach {
             headers[it.first] = it.second
         }
@@ -103,13 +103,13 @@ data class KurlContext @PublishedApi internal constructor(
 
     fun headers(
         headers: Map<String, Any>
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         this.headers += headers
     }
 
     fun headers(
         list: Collection<Pair<String, Any>>
-    ): KurlContext = apply {
+    ): KurlScope = apply {
         headers += list
     }
 

@@ -18,15 +18,26 @@ package com.cioccarellia.kurl.ktx.okhttp
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.dsl.KurlContext
-import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
+import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.emptyEndpoint
+import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
 import okhttp3.Request
 
+/**
+ * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ *
+ * @param       api         The actual base web API endpoint to use
+ *                          as root of the request
+ * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
+ * @param       block       Kurl DSL scope construction lambda
+ * */
 fun Request.Builder.kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit = {}
+    block: KurlScope.() -> Unit = {}
 ): Request.Builder {
     val request = com.cioccarellia.kurl.kurl(api, endpoint, block)
 
@@ -38,13 +49,44 @@ fun Request.Builder.kurl(
     return this
 }
 
+/**
+ * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ *
+ * @param       container   The actual base web API [container][KurlApiContainer] to use
+ *                          as root of the request
+ * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
+ * @param       block       Kurl DSL scope construction lambda
+ * */
 fun Request.Builder.kurl(
     container: KurlApiContainer,
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlContext.() -> Unit = {}
+    block: KurlScope.() -> Unit = {}
 ): Request.Builder = kurl(container.api, endpoint, block)
 
+/**
+ * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * along with the supplied parameters, and the result is converted into an [OkHttp Request][Request].
+ *
+ * @param       directUrl   The URL where the request is headed at.
+ *                          This sticks together the base web API and
+ *                          the [endpoint][Endpoint] address
+ * @param       block       Kurl DSL scope construction lambda
+ * */
 fun Request.Builder.kurl(
     directUrl: String,
-    block: KurlContext.() -> Unit
+    block: KurlScope.() -> Unit
 ): Request.Builder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
+
+/**
+ * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * along with the supplied parameters, and the result is built into an OkHttp Request.
+ *
+ * @param       kurlBuilder The source Kurl builder
+ * */
+fun Request.Builder.kurl(
+    kurlBuilder: KurlBuilder
+): Request = kurl(kurlBuilder.api, kurlBuilder.endpoint).build()

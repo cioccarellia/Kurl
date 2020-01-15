@@ -13,16 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package com.cioccarellia.kurl
+package com.cioccarellia.kurl.annotations
 
-import com.cioccarellia.kurl.api.Endpoint
-
-/**
- * Creates an empty [endpoint][Endpoint]
- * */
-fun emptyEndpoint() = Endpoint(relativePath = "")
-
-/**
- * Creates an empty mutable map to be used as headers
- * */
-fun emptyHeaders(): Map<String, Any> = mutableMapOf()
+@Target(AnnotationTarget.FUNCTION)
+@MustBeDocumented
+annotation class KurlLauncher
