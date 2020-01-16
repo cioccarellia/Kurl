@@ -17,4 +17,6 @@ package com.cioccarellia.kurl.annotations
 
 @Target(AnnotationTarget.FUNCTION)
 @MustBeDocumented
-annotation class KurlLauncher
+annotation class KurlLauncher(
+    val impliesRuntimeChecking: Boolean
+)

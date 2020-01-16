@@ -15,13 +15,17 @@
  **/
 package com.cioccarellia.kurlsample.containers
 
+import com.cioccarellia.kurl.annotations.Enforce
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.kurl
+import com.cioccarellia.kurlsample.constants.DemoConstants
 
 class GithubApiContainer(
     private val username: String
 ) : KurlApiContainer() {
+
+    @Enforce(regex = DemoConstants.urlValidationRegexp)
     override val api = Api.direct(
         url = "https://api.github.com",
         persistentHeaders = mapOf(

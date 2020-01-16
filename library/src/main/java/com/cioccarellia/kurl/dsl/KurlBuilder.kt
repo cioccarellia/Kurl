@@ -21,11 +21,11 @@ import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.compose.Composer
 
 /**
- * Output class representing the high level interface for
+ * Output class representing an high level interface for
  * importing/exporting request data, derived from the
  * execution of a [kurl launcher][KurlLauncher] function.
  *
- * All the processed fields are final, thus the exact representation
+ * All the processed fields are public and final, thus the exact representation
  * of what the real URL the calling software is referring to, in Kurl syntax.
  * */
 data class KurlBuilder @PublishedApi internal constructor(

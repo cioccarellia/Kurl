@@ -17,13 +17,13 @@ package com.cioccarellia.kurl.api
 
 import com.cioccarellia.kurl.compose.KurlComposable
 import com.cioccarellia.kurl.constants.KurlConstants
+import com.cioccarellia.kurl.emptyHeaders
 import com.cioccarellia.kurl.extensions.domain
 import com.cioccarellia.kurl.extensions.path
 import com.cioccarellia.kurl.extensions.port
 import com.cioccarellia.kurl.extensions.protocol
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 import com.cioccarellia.kurl.extensions.suffixIfNotEndingWith
-import com.cioccarellia.kurl.emptyHeaders
 import java.net.URL
 
 /**

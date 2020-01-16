@@ -20,6 +20,7 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.dsl.KurlBuilder
 import com.cioccarellia.kurl.dsl.KurlScope
+import com.cioccarellia.kurl.reflection.checkIntegrity
 
 /**
  * Kurl launch function producing a [builder][KurlBuilder], to use for requests.
@@ -31,12 +32,12 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher
+@KurlLauncher(impliesRuntimeChecking = true)
 fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit = {}
-): KurlBuilder = KurlScope(api, endpoint).apply { block() }.get()
+): KurlBuilder = KurlScope(api, endpoint).apply { block() }.get().checkIntegrity()
 
 
 /**
@@ -49,8 +50,10 @@ fun kurl(
  *                          the [endpoint][Endpoint] address
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher
+@KurlLauncher(impliesRuntimeChecking = false)
 fun kurl(
     directUrl: String,
     block: KurlScope.() -> Unit
 ): KurlBuilder = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()
+
+

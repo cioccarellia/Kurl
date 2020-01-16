@@ -23,6 +23,6 @@ import com.cioccarellia.kurl.api.Endpoint
 fun emptyEndpoint() = Endpoint(relativePath = "")
 
 /**
- * Creates an empty mutable map to be used as headers
+ * Creates an empty mutable map to be used as headers store
  * */
 fun emptyHeaders(): Map<String, Any> = mutableMapOf()

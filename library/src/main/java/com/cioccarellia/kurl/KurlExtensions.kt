@@ -15,7 +15,6 @@
  **/
 package com.cioccarellia.kurl
 
-import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
@@ -30,28 +29,10 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher
 fun Api.kurl(
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit
 ): KurlBuilder = kurl(this, endpoint = endpoint, block = block)
-
-/**
- * Kurl extension function producing a [builder][KurlBuilder] from an [API][Api].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
- * along with the supplied parameters, and the result is then returned.
- *
- * @param       directUrl   The URL where the request is headed at.
- *                          This sticks together the base web API and
- *                          the [endpoint][Endpoint] address
- * @param       block       Kurl DSL scope construction lambda
- * */
-@KurlLauncher
-fun Api.kurl(
-    directUrl: String,
-    block: KurlScope.() -> Unit
-): KurlBuilder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
-
 
 /**
  * Kurl extension function producing a [builder][KurlBuilder] from an [Api Container][KurlApiContainer].
@@ -61,24 +42,7 @@ fun Api.kurl(
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher
 fun KurlApiContainer.kurl(
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit
 ): KurlBuilder = kurl(api, endpoint = endpoint, block = block)
-
-/**
- * Kurl extension function producing a [builder][KurlBuilder] from an [Api Container][KurlApiContainer].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
- * along with the supplied parameters, and the result is then returned.
- *
- * @param       directUrl   The URL where the request is headed at.
- *                          This sticks together the base web API and
- *                          the [endpoint][Endpoint] address
- * @param       block       Kurl DSL scope construction lambda
- * */
-@KurlLauncher
-fun KurlApiContainer.kurl(
-    directUrl: String,
-    block: KurlScope.() -> Unit
-): KurlBuilder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
