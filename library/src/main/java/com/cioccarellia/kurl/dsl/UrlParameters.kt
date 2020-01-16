@@ -15,6 +15,11 @@
  **/
 package com.cioccarellia.kurl.dsl
 
+
+/**
+ * Represent an HTTP request GET parameters, or,
+ * the selected URL key-values parameters chain
+ * */
 data class UrlParameters(
     var parameters: Map<String, Any> = emptyMap(),
     var prefix: String = "?",

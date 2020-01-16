@@ -15,6 +15,12 @@
  **/
 package com.cioccarellia.kurl.extensions
 
+/**
+ * Extracts the protocol string from a direct url, if present.
+ *
+ * @param       default     The default value that is going to be used if no protocol is specified.
+ *                          By default, it is null, since direct URLs are strict.
+ * */
 fun String.protocol(default: String? = null): String? {
     return when {
         contains("://") -> {
@@ -24,6 +30,9 @@ fun String.protocol(default: String? = null): String? {
     }
 }
 
+/**
+ * Extracts the domain string from a direct url.
+ * */
 fun String.domain(): String {
     require(isNotBlank()) {
         "Domain must not be blank"
@@ -44,6 +53,9 @@ fun String.domain(): String {
     return domain
 }
 
+/**
+ * Extracts the URL port from a direct url, if present.
+ * */
 fun String.port(): Int? {
     if (isBlank()) return null
 
@@ -60,6 +72,9 @@ fun String.port(): Int? {
     return port.toInt()
 }
 
+/**
+ * Extracts the web API path string from a direct url, if present.
+ * */
 fun String.path(): String? {
     if (isBlank()) return null
 
