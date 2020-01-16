@@ -6,25 +6,38 @@
  *
  * You may obtain a copy of the License at
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package com.cioccarellia.kurl.annotations
 
-import com.cioccarellia.kurl.dsl.KurlScope
+package com.cioccarellia.kurl
 
-/**
- * Annotates a function capable of instantiating a
- * [Kurl scope][KurlScope].
- *
- * Those methods are defined as launch functions.
- * */
-@Target(AnnotationTarget.FUNCTION)
-@MustBeDocumented
-annotation class KurlLauncher(
-    val impliesRuntimeChecking: Boolean
-)
+import com.cioccarellia.kurl.annotations.Enforce
+import com.cioccarellia.kurl.api.Api
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+
+class AnnotationChecksTests {
+
+    @Enforce("hjdyjt")
+    val api = Api(
+        domain = "api.github.com"
+    )
+
+
+    @Test fun check() {
+        assertThat(
+            kotlin.runCatching {
+                val username = "AndreaCioccarelli"
+
+                api.kurl {
+                    endpoint("users/$username/repos")
+                }
+            }.isFailure
+        ).isTrue()
+    }
+}
