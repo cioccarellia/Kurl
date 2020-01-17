@@ -18,18 +18,24 @@ package com.cioccarellia.kurl.compose
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 
 object Composer {
+    /**
+     * Joins two strings as two URLs
+     * */
     fun compose(
         p1: String,
         p2: String
     ): String {
         return when {
             p1.isEmpty() && p2.isEmpty() -> ""
-            p1.isEmpty() -> p2.removePrefixAndSuffix("/")
-            p2.isEmpty() -> p1.removePrefixAndSuffix("/")
-            else -> p1.removePrefixAndSuffix("/") + "/" + p2.removePrefixAndSuffix("/")
+            p1.isEmpty() -> p2.sanitize()
+            p2.isEmpty() -> p1.sanitize()
+            else -> p1.sanitize() + "/" + p2.sanitize()
         }
     }
 
+    /**
+     * Joins string and [composable][KurlComposable] as two URLs
+     * */
     fun compose(
         url: String,
         endpoint: KurlComposable
@@ -37,6 +43,9 @@ object Composer {
         return compose(url, endpoint.url())
     }
 
+    /**
+     * Joins string and [composable][KurlComposable] as two URLs
+     * */
     fun compose(
         endpoint: KurlComposable,
         url: String
@@ -44,12 +53,16 @@ object Composer {
         return compose(endpoint.url(), url)
     }
 
+    /**
+     * Joins two [composables][KurlComposable] as two URLs
+     * */
     fun compose(
         p1: KurlComposable,
         p2: KurlComposable
     ) = compose(p1.url(), p2.url())
 
-    fun sanitize(
-        path: String
-    ) = path.removePrefixAndSuffix("/")
+    /**
+     * Makes sure an URL is not malformed
+     * */
+    private fun String.sanitize() = removePrefixAndSuffix("/")
 }

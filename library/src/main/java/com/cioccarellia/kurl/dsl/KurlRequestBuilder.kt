@@ -15,7 +15,6 @@
  **/
 package com.cioccarellia.kurl.dsl
 
-import com.cioccarellia.kurl.annotations.Enforce
 import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
@@ -30,7 +29,6 @@ import com.cioccarellia.kurl.compose.Composer
  * of what the real URL the calling software is referring to, in Kurl syntax.
  * */
 data class KurlRequestBuilder @PublishedApi internal constructor(
-    @Enforce("hjdyjt")
     val api: Api,
     val endpoint: Endpoint,
     val urlParameters: UrlParameters,

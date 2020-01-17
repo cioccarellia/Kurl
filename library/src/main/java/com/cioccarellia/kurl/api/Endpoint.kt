@@ -18,6 +18,13 @@ package com.cioccarellia.kurl.api
 import com.cioccarellia.kurl.compose.Composer
 import com.cioccarellia.kurl.compose.KurlComposable
 
+/**
+ * Represents an url semi-path inside a complete API address.
+ * An [API][Api] is the root web server URL, and an endpoint is
+ * the string coming afterwards.
+ *
+ * Usually it is nested hierarchically and contains
+ * */
 class Endpoint(
     relativePath: String
 ) : KurlComposable {
