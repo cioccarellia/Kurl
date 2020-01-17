@@ -18,12 +18,12 @@ package com.cioccarellia.kurl
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlRequestBuilder
 import com.cioccarellia.kurl.dsl.KurlScope
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [API][Api].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function producing a [builder][KurlRequestBuilder] from an [API][Api].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
@@ -32,11 +32,11 @@ import com.cioccarellia.kurl.dsl.KurlScope
 fun Api.kurl(
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit
-): KurlBuilder = kurl(this, endpoint = endpoint, block = block)
+): KurlRequestBuilder = kurl(this, endpoint = endpoint, block = block)
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [Api Container][KurlApiContainer].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function producing a [builder][KurlRequestBuilder] from an [Api Container][KurlApiContainer].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
@@ -45,4 +45,4 @@ fun Api.kurl(
 fun KurlApiContainer.kurl(
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit
-): KurlBuilder = kurl(api, endpoint = endpoint, block = block)
+): KurlRequestBuilder = kurl(api, endpoint = endpoint, block = block)

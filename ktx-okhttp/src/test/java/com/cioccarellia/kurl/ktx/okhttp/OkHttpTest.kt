@@ -10,7 +10,7 @@ class OkHttpTest {
     private val requestBuilder = Request.Builder()
 
     @Test
-    fun finalizedDirectRequestBuilder() {
+    internal fun finalizedDirectRequestBuilder() {
         val request = requestBuilder
             .kurl("https://api.github.com") {
                 endpoint("users/AndreaCioccarelli")
@@ -23,7 +23,7 @@ class OkHttpTest {
     }
 
     @Test
-    fun finalizedInlineRequestBuilder() {
+    internal fun finalizedInlineRequestBuilder() {
         val request = requestBuilder
             .kurl(
                 Api(
@@ -41,7 +41,7 @@ class OkHttpTest {
 
 
     @Test
-    fun finalizedInvalidRequest() {
+    internal fun finalizedInvalidRequest() {
         val request = requestBuilder
             .kurl(
                 Api(

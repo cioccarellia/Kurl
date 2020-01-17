@@ -19,22 +19,20 @@ package com.cioccarellia.kurl
 import com.cioccarellia.kurl.annotations.Enforce
 import com.cioccarellia.kurl.api.Api
 import com.google.common.truth.Truth.assertThat
-import org.junit.Test
 
 class AnnotationChecksTests {
 
-    @Enforce("hjdyjt")
     val api = Api(
         domain = "api.github.com"
     )
 
-
-    @Test fun check() {
+    internal fun check() {
         assertThat(
             kotlin.runCatching {
                 val username = "AndreaCioccarelli"
 
-                api.kurl {
+                @Enforce("hjdyjt")
+                val request = api.kurl {
                     endpoint("users/$username/repos")
                 }
             }.isFailure

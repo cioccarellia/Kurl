@@ -18,15 +18,15 @@ package com.cioccarellia.kurl.ktx.okhttp
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlRequestBuilder
 import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.emptyEndpoint
 import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
 import okhttp3.Request
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can then be converted into an [OkHttp Request][Request].
  *
  * @param       api         The actual base web API endpoint to use
@@ -50,8 +50,8 @@ fun Request.Builder.kurl(
 }
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can be converted into an [OkHttp Request][Request].
  *
  * @param       container   The actual base web API [container][KurlApiContainer] to use
@@ -66,8 +66,8 @@ fun Request.Builder.kurl(
 ): Request.Builder = kurl(container.api, endpoint, block)
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request.Builder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding an [OkHttp Request Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can be converted into an [OkHttp Request][Request].
  *
  * @param       directUrl   The URL where the request is headed at.
@@ -81,12 +81,12 @@ fun Request.Builder.kurl(
 ): Request.Builder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from an [OkHttp Request Builder][Request].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function building a processed [OkHttp Request][Request] from an [OkHttp Builder][Request.Builder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is built into an OkHttp Request.
  *
  * @param       kurlBuilder The source Kurl builder
  * */
 fun Request.Builder.kurl(
-    kurlBuilder: KurlBuilder
+    kurlBuilder: KurlRequestBuilder
 ): Request = kurl(kurlBuilder.api, kurlBuilder.endpoint).build()

@@ -22,7 +22,7 @@ import org.junit.Test
 class OperatorTests {
 
     @Test
-    fun sumEndpoints() {
+    internal fun sumEndpoints() {
         val data = Endpoint("data")
         val space = Endpoint("space")
 
@@ -33,7 +33,7 @@ class OperatorTests {
     }
 
     @Test
-    fun sumUrlAndEndpoint() {
+    internal fun sumUrlAndEndpoint() {
         val space = Endpoint("space")
         val data = "data"
 

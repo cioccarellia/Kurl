@@ -21,7 +21,7 @@ import org.junit.Test
 
 class ApiTests {
 
-    @Test fun testPathlessDoain() =
+    @Test internal fun testPathlessDoain() =
         assertThat(
             Api(
                 domain = "config.kernel.org",
@@ -29,7 +29,7 @@ class ApiTests {
             ).toString()
         ).isEqualTo("https://config.kernel.org")
 
-    @Test fun testCompleteUrl() =
+    @Test internal fun testCompleteUrl() =
         assertThat(
             Api(
                 domain = "i.instagram.com",
@@ -39,7 +39,7 @@ class ApiTests {
             ).toString()
         ).isEqualTo("http://i.instagram.com:80/api/v1")
 
-    @Test fun testCustomProtocol() =
+    @Test internal fun testCustomProtocol() =
         assertThat(
             Api(
                 domain = "hell.lucifer",
@@ -48,7 +48,7 @@ class ApiTests {
         ).isEqualTo("ftp://hell.lucifer")
 
 
-    @Test fun testBlankApiDomain() =
+    @Test internal fun testBlankApiDomain() =
         assertThat(
             kotlin.runCatching {
                 Api(
@@ -58,7 +58,7 @@ class ApiTests {
             }.isFailure
         ).isTrue()
 
-    @Test fun testJoinedApiAndPath() =
+    @Test internal fun testJoinedApiAndPath() =
         assertThat(
             kotlin.runCatching {
                 Api(
@@ -67,14 +67,14 @@ class ApiTests {
             }.isFailure
         ).isTrue()
 
-    @Test fun testDomainOnly() =
+    @Test internal fun testDomainOnly() =
         assertThat(
             Api(
                 domain = "console.firebase.google.com"
             ).toString()
         ).isEqualTo("https://console.firebase.google.com")
 
-    @Test fun testNullProtocol() =
+    @Test internal fun testNullProtocol() =
         assertThat(
             Api(
                 domain = "localhost",
@@ -83,37 +83,37 @@ class ApiTests {
             ).toString()
         ).isEqualTo("localhost:6554")
 
-    @Test fun testDirect() =
+    @Test internal fun testDirect() =
         assertThat(
             Api.direct("https://webstore.hook.com").toString()
         ).isEqualTo("https://webstore.hook.com")
 
-    @Test fun testLocalhost() =
+    @Test internal fun testLocalhost() =
         assertThat(
             Api.direct("localhost").toString()
         ).isEqualTo("localhost")
 
-    @Test fun testDirectHostAndPort() =
+    @Test internal fun testDirectHostAndPort() =
         assertThat(
             Api.direct("localhost:445").toString()
         ).isEqualTo("localhost:445")
 
-    @Test fun testDirectProtocolHostAndPort() =
+    @Test internal fun testDirectProtocolHostAndPort() =
         assertThat(
             Api.direct("http://cioccarellia.it:445").toString()
         ).isEqualTo("http://cioccarellia.it:445")
 
-    @Test fun testDirectFull() =
+    @Test internal fun testDirectFull() =
         assertThat(
             Api.direct("tftp://localhost:445/UAV/deploy/custom").toString()
         ).isEqualTo("tftp://localhost:445/UAV/deploy/custom")
 
-    @Test fun testDirectBackslashed() =
+    @Test internal fun testDirectBackslashed() =
         assertThat(
             Api.direct("localhost/").toString()
         ).isEqualTo("localhost")
 
-    @Test fun testDirectSubdomainAndPath() =
+    @Test internal fun testDirectSubdomainAndPath() =
         assertThat(
             Api.direct("api.github.com/users/AndreaCioccarelli").toString()
         ).isEqualTo("api.github.com/users/AndreaCioccarelli")

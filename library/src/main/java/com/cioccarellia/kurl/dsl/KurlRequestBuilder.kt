@@ -29,7 +29,7 @@ import com.cioccarellia.kurl.compose.Composer
  * All the processed fields are public and final, thus the exact representation
  * of what the real URL the calling software is referring to, in Kurl syntax.
  * */
-data class KurlBuilder @PublishedApi internal constructor(
+data class KurlRequestBuilder @PublishedApi internal constructor(
     @Enforce("hjdyjt")
     val api: Api,
     val endpoint: Endpoint,

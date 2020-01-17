@@ -41,7 +41,7 @@ data class KurlScope @PublishedApi internal constructor(
     @PublishedApi internal val urlParameters = UrlParameters()
     @PublishedApi internal var fragment = ""
 
-    @PublishedApi internal fun get() = KurlBuilder(api, endpoint, urlParameters, headers, fragment)
+    @PublishedApi internal fun get() = KurlRequestBuilder(api, endpoint, urlParameters, headers, fragment)
 
     fun endpoint(
         path: String

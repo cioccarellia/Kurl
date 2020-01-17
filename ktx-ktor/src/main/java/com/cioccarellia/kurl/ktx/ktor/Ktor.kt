@@ -19,7 +19,7 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.compose.Composer
-import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlRequestBuilder
 import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.emptyEndpoint
 import com.cioccarellia.kurl.ktx.ktor.extensions.toKtorProtocol
@@ -33,8 +33,8 @@ import io.ktor.http.DEFAULT_PORT
 import io.ktor.http.URLProtocol
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from a [Ktor Http Request Builder][HttpRequestBuilder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding a [Ktor Builder][HttpRequestBuilder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can then be converted into a [Ktor Request][HttpRequestData].
  *
  * @param       api         The actual base web API endpoint to use
@@ -76,8 +76,8 @@ fun HttpRequestBuilder.kurl(
 }
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from a [Ktor Http Request Builder][HttpRequestBuilder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding a [Ktor Builder][HttpRequestBuilder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can then be converted into a [Ktor Request][HttpRequestData].
  *
  * @param       container   The actual base web API [container][KurlApiContainer] to use
@@ -92,8 +92,8 @@ fun HttpRequestBuilder.kurl(
 ): HttpRequestBuilder = kurl(container.api, endpoint, block)
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from a [Ktor Http Request Builder][HttpRequestBuilder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function modifying and yielding a [Ktor Builder][HttpRequestBuilder].
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result can then be converted into a [Ktor Request][HttpRequestData].
  *
  * @param       directUrl   The URL where the request is headed at.
@@ -107,12 +107,12 @@ fun HttpRequestBuilder.kurl(
 ): HttpRequestBuilder = kurl(Api.direct(directUrl), emptyEndpoint(), block)
 
 /**
- * Kurl extension function producing a [builder][KurlBuilder] from a [Ktor Http Request Builder][HttpRequestBuilder].
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl extension function building a processed [Ktor Request][HttpRequestBuilder] from a [Ktor Builder][HttpRequestData]
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is built into a [Ktor Request][HttpRequestData].
  *
  * @param       kurlBuilder The source Kurl builder
  * */
 fun HttpRequestBuilder.kurl(
-    kurlBuilder: KurlBuilder
+    kurlBuilder: KurlRequestBuilder
 ): HttpRequestData = kurl(kurlBuilder.api, kurlBuilder.endpoint).build()

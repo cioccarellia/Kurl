@@ -18,13 +18,13 @@ package com.cioccarellia.kurl
 import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.dsl.KurlBuilder
+import com.cioccarellia.kurl.dsl.KurlRequestBuilder
 import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.reflection.checkIntegrity
 
 /**
- * Kurl launch function producing a [builder][KurlBuilder], to use for requests.
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl launch function producing a [builder][KurlRequestBuilder], to use for requests.
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       api         The actual base web API endpoint to use
@@ -37,11 +37,11 @@ fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit = {}
-): KurlBuilder = KurlScope(api, endpoint).apply { block() }.get().checkIntegrity()
+): KurlRequestBuilder = KurlScope(api, endpoint).apply { block() }.get().checkIntegrity()
 
 /**
- * Kurl launch function producing a [builder][KurlBuilder], to use for requests.
- * The passed lambda is applied to the Kurl construction [scope][KurlScope]
+ * Kurl launch function producing a [builder][KurlRequestBuilder], to use for requests.
+ * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       directUrl   The URL where the request is headed at.
@@ -53,6 +53,6 @@ fun kurl(
 fun kurl(
     directUrl: String,
     block: KurlScope.() -> Unit
-): KurlBuilder = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()
+): KurlRequestBuilder = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()
 
 
