@@ -15,6 +15,7 @@
  **/
 package com.cioccarellia.kurl.api
 
+import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.compose.KurlComposable
 import com.cioccarellia.kurl.constants.KurlConstants
 import com.cioccarellia.kurl.emptyHeaders
@@ -27,20 +28,28 @@ import com.cioccarellia.kurl.extensions.suffixIfNotEndingWith
 import java.net.URL
 
 /**
- * Class representing an API base url.
+ * Collection of a root API url data, representing the endpoint
+ * the server is running at.
+ * This class is used by [Kurl launch functions][KurlLauncher] to
+ * create a request from a starting point, being aware of the
+ * submitted data that will be processed for each request.
  *
- * @param protocol Optional parameter specifying the protocol used for communication
- *                  between the server and the client. By default it is set to HTTPS.
- *                  It can be either the form "https://" or "https".
+ * To achieve maximum clarity, arguments should be named and
+ * ordered as they will end up in the final URL.
  *
- * @param domain The base domain of the website which hosts the server.
- *                  It has to be in the form "get.dns.cloudflare-dns.io"
+ * @param       protocol            Optional parameter specifying the protocol used for communication
+ *                                  between the server and the client. By default it is set to HTTPS.
+ *                                  It can be either the form "https://" or "https".
  *
- * @param port Optional parameter specifying the port the server is running on.
+ * @param       domain              The base domain of the website hosting the server.
  *
- * @param path Optional parameter specifying the base path to the web API root,
- *                  which is then appended to reach the root server APIs.
+ * @param       port                Optional parameter specifying the port the server is running on.
  *
+ * @param       path                Optional parameter specifying the base path to the web API root server,
+ *                                  which is then appended to the domain to reach the right endpoint.
+ *
+ * @param       persistentHeaders   Optional parameter specifying the constants headers that should be set for
+ *                                  every request sent via this API.
  * */
 data class Api(
     val protocol: String? = KurlConstants.defaultProtocol,
@@ -68,13 +77,18 @@ data class Api(
 
     companion object {
         /**
-         * Direct
+         * By creating an API object using the direct notation, the given string
+         * will be accepted without any assertion or correction.
          * */
         fun direct(
             url: String,
             persistentHeaders: Map<String, Any> = emptyHeaders()
         ) = Api(url, persistentHeaders.toMutableMap())
 
+        /**
+         * By creating an API object using the direct notation, the given string
+         * will be accepted without any assertion or correction.
+         * */
         fun direct(
             url: URL,
             persistentHeaders: Map<String, Any> = emptyHeaders()

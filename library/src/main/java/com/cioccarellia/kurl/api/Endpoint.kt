@@ -30,23 +30,37 @@ class Endpoint(
 ) : KurlComposable {
     private var path: String = Composer.sanitize(relativePath)
 
+    /**
+     * Since an endpoint is not aware of its position, nor its
+     * super/sub endpoints, it returns the local value
+     * */
     override fun url() = path
     override fun toString() = path
 
+    /**
+     * Chains two endpoints
+     * */
     operator fun plus(other: KurlComposable): Endpoint {
-        return Endpoint(
-            Composer.compose(url(), other)
-        )
+        return Endpoint(Composer.compose(url(), other))
     }
 
+    /**
+     * Chains the passed string to this endpoint
+     * */
     operator fun plus(other: String): String {
         return Composer.compose(this, other)
     }
 
+    /**
+     * Joins two endpoints
+     * */
     operator fun plusAssign(other: KurlComposable) {
         path = Composer.compose(url(), other)
     }
 
+    /**
+     * Joins the passed string to this endpoint
+     * */
     operator fun plusAssign(other: String) {
         path = Composer.compose(url(), other)
     }

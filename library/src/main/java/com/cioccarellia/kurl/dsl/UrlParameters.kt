@@ -37,6 +37,10 @@ data class UrlParameters(
         }
     }
 
+    /**
+     * Adds the passed parameters to the current lists and
+     * overrides prefix, suffix and separator fields
+     * */
     operator fun plusAssign(other: UrlParameters) {
         parameters += other.parameters
         prefix = other.prefix

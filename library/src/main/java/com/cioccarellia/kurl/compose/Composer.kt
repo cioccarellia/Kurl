@@ -27,9 +27,9 @@ object Composer {
     ): String {
         return when {
             p1.isEmpty() && p2.isEmpty() -> ""
-            p1.isEmpty() -> p2.sanitize()
-            p2.isEmpty() -> p1.sanitize()
-            else -> p1.sanitize() + "/" + p2.sanitize()
+            p1.isEmpty() -> sanitize(p2)
+            p2.isEmpty() -> sanitize(p1)
+            else -> sanitize(p1) + "/" + sanitize(p2)
         }
     }
 
@@ -64,5 +64,5 @@ object Composer {
     /**
      * Makes sure an URL is not malformed
      * */
-    private fun String.sanitize() = removePrefixAndSuffix("/")
+    fun sanitize(url: String) = url.removePrefixAndSuffix("/")
 }

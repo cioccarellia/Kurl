@@ -15,6 +15,9 @@
  **/
 package com.cioccarellia.kurl.api
 
+/**
+ * Container for a specified [API][Api] model and its endpoints
+ * */
 abstract class KurlApiContainer {
     abstract val api: Api
 }
