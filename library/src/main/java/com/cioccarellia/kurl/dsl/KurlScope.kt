@@ -43,18 +43,35 @@ data class KurlScope @PublishedApi internal constructor(
 
     @PublishedApi internal fun get() = KurlRequestBuilder(api, endpoint, urlParameters, headers, fragment)
 
+    /**
+     * Safely adds the passed path to the current [endpoint][Endpoint]
+     * */
     fun endpoint(
         path: String
     ): KurlScope = apply {
         endpoint += path
     }
 
+    /**
+     * Safely adds the passed [endpoint][Endpoint] to the current one
+     * */
     fun endpoint(
         path: Endpoint
     ): KurlScope = apply {
         endpoint += path
     }
 
+    /**
+     * Creates a key-value parameter chain to be postfixed to the URL.
+     *
+     * @param       pairs       Vararg representing the pairs that will be converted into
+     *                          parameters in the final URL.
+     *                          Equal items do not replace previous ones, but instead they are appended.
+     * @param       prefix      String going before the KV chain. By default, "?"
+     * @param       separator   String to be used to split the different pairs of KV. By default, "&"
+     * @param       suffix      String going after the KV chain. By default, ""
+     *
+     * */
     fun parameters(
         vararg pairs: Pair<String, Any>,
         prefix: String = "?",
@@ -62,6 +79,18 @@ data class KurlScope @PublishedApi internal constructor(
         suffix: String = ""
     ): KurlScope = parameters(pairs.toMap(), prefix, separator, suffix)
 
+
+    /**
+     * Creates a key-value parameter chain to be postfixed to the URL.
+     *
+     * @param       parameters  Map representing the pairs that will be converted into
+     *                          parameters in the final URL.
+     *                          Equal items do not replace previous ones, but instead they are appended.
+     * @param       prefix      String going before the KV chain. By default, "?"
+     * @param       separator   String to be used to split the different pairs of KV. By default, "&"
+     * @param       suffix      String going after the KV chain. By default, ""
+     *
+     * */
     fun parameters(
         parameters: Map<String, Any>,
         prefix: String = "?",
@@ -78,12 +107,18 @@ data class KurlScope @PublishedApi internal constructor(
         )
     }
 
+    /**
+     * Creates a key-value parameter chain to be postfixed to the URL.
+     * */
     fun parameters(
         parameters: UrlParameters
     ): KurlScope = apply {
         urlParameters += parameters
     }
 
+    /**
+     * Sets the passed [key] to [value] in the header map
+     * */
     fun header(
         key: String,
         value: Any
@@ -91,12 +126,27 @@ data class KurlScope @PublishedApi internal constructor(
         headers[key] = value
     }
 
+    /**
+     * Decomposes and sets the passed pair into key to value in the header map
+     * */
     fun header(
         pair: Pair<String, Any>
     ): KurlScope = apply {
         headers[pair.first] = pair.second
     }
 
+    /**
+     * Sets the passed keys to values in the header map
+     * */
+    fun headers(
+        headers: Map<String, Any>
+    ): KurlScope = apply {
+        this.headers += headers
+    }
+
+    /**
+     * Decomposes and sets the passed pairs into keys to values in the header map
+     * */
     fun headers(
         vararg pairs: Pair<String, Any>
     ): KurlScope = apply {
@@ -105,18 +155,18 @@ data class KurlScope @PublishedApi internal constructor(
         }
     }
 
-    fun headers(
-        headers: Map<String, Any>
-    ): KurlScope = apply {
-        this.headers += headers
-    }
-
+    /**
+     * Sets the passed keys to values in the header map
+     * */
     fun headers(
         list: Collection<Pair<String, Any>>
     ): KurlScope = apply {
         headers += list
     }
 
+    /**
+     * Sets the fragment tag at the end of the URL
+     * */
     fun fragment(
         fragment: String
     ) = apply {

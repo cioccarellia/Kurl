@@ -18,7 +18,6 @@ package com.cioccarellia.kurlsample.containers
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.kurl
-import com.cioccarellia.kurlsample.constants.DemoConstants
 
 class GithubApiContainer(
     private val username: String

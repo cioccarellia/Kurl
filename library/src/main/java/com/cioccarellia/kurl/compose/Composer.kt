@@ -17,6 +17,10 @@ package com.cioccarellia.kurl.compose
 
 import com.cioccarellia.kurl.extensions.removePrefixAndSuffix
 
+/**
+ * Utility class used to join together URLs in a way
+ * that maximizes usability and minimizes error likeliness
+ * */
 object Composer {
     /**
      * Joins two strings as two URLs
