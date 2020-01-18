@@ -6,7 +6,7 @@ import com.google.common.truth.Truth.assertThat
 import okhttp3.Request
 import org.junit.Test
 
-class OkHttpTest {
+internal class OkHttpTest {
     private val requestBuilder = Request.Builder()
 
     @Test

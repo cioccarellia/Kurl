@@ -19,7 +19,7 @@ import com.cioccarellia.kurl.api.Endpoint
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class OperatorTests {
+internal class OperatorTests {
 
     @Test
     internal fun sumEndpoints() {

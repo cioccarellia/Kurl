@@ -19,7 +19,7 @@ import com.cioccarellia.kurl.api.Api
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class KurlFunctionsTests {
+internal class KurlFunctionsTests {
 
     private val baseApi = Api(
         domain = "heaven.lucifer",

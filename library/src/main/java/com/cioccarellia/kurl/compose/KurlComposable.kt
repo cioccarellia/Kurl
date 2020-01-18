@@ -15,6 +15,13 @@
  **/
 package com.cioccarellia.kurl.compose
 
+/**
+ * Represents a generic element whose content is
+ * represented as an URL
+ * */
 interface KurlComposable {
+    /**
+     * Composable content
+     * */
     fun url(): String
 }

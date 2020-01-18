@@ -6,10 +6,10 @@ import com.google.common.truth.Truth.assertThat
 import io.ktor.client.request.HttpRequestBuilder
 import org.junit.Test
 
-class KtorTest {
+internal class KtorTest {
 
     @Test
-    fun injectKtor() {
+    internal fun injectKtor() {
         val ktorRequest = HttpRequestBuilder()
             .kurl(
                 Api(

@@ -19,7 +19,7 @@ import com.cioccarellia.kurl.api.Api
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class ApiTests {
+internal class ApiTests {
 
     @Test internal fun testPathlessDoain() =
         assertThat(
