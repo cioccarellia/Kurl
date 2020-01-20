@@ -26,5 +26,5 @@ import com.cioccarellia.kurl.dsl.KurlScope
 @Target(AnnotationTarget.FUNCTION)
 @MustBeDocumented
 annotation class KurlLauncher(
-    val impliesRuntimeChecking: Boolean
+    val impliesCheck: Boolean
 )

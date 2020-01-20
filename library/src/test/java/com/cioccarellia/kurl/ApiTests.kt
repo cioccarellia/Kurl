@@ -21,7 +21,7 @@ import org.junit.Test
 
 internal class ApiTests {
 
-    @Test internal fun testPathlessDoain() =
+    @Test internal fun testPathlessDomain() =
         assertThat(
             Api(
                 domain = "config.kernel.org",

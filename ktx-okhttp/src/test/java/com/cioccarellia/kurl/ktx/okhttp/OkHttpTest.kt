@@ -39,7 +39,6 @@ internal class OkHttpTest {
         ).isEqualTo("https://api.github.com/users/AndreaCioccarelli")
     }
 
-
     @Test
     internal fun finalizedInvalidRequest() {
         val request = requestBuilder

@@ -31,7 +31,7 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher(impliesRuntimeChecking = true)
+@KurlLauncher(impliesCheck = false)
 fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
@@ -48,10 +48,8 @@ fun kurl(
  *                          the [endpoint][Endpoint] address
  * @param       block       Kurl DSL scope construction lambda
  * */
-@KurlLauncher(impliesRuntimeChecking = false)
+@KurlLauncher(impliesCheck = false)
 fun kurl(
     directUrl: String,
     block: KurlScope.() -> Unit
 ): KurlRequestBuilder = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()
-
-
