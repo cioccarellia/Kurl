@@ -27,7 +27,7 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
- * @param       block       Kurl DSL scope construction lambda
+ * @param       block       Kurl DSL scope construction lambda.
  * */
 fun Api.kurl(
     endpoint: Endpoint = emptyEndpoint(),
@@ -40,7 +40,7 @@ fun Api.kurl(
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
- * @param       block       Kurl DSL scope construction lambda
+ * @param       block       Kurl DSL scope construction lambda.
  * */
 fun KurlApiContainer.kurl(
     endpoint: Endpoint = emptyEndpoint(),

@@ -27,9 +27,9 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * along with the supplied parameters, and the result is then returned.
  *
  * @param       api         The actual base web API endpoint to use
- *                          as root of the request
+ *                          as root of the request.
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
- * @param       block       Kurl DSL scope construction lambda
+ * @param       block       Kurl DSL scope construction lambda.
  * */
 @KurlLauncher(impliesCheck = false)
 fun kurl(
@@ -45,8 +45,8 @@ fun kurl(
  *
  * @param       directUrl   The URL where the request is headed at.
  *                          This sticks together the base web API and
- *                          the [endpoint][Endpoint] address
- * @param       block       Kurl DSL scope construction lambda
+ *                          the [endpoint][Endpoint] address.
+ * @param       block       Kurl DSL scope construction lambda.
  * */
 @KurlLauncher(impliesCheck = false)
 fun kurl(

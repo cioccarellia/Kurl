@@ -47,6 +47,22 @@ internal class ApiTests {
             ).toString()
         ).isEqualTo("ftp://hell.lucifer")
 
+    @Test internal fun testProtocolFormats() {
+        assertThat(
+            Api(
+                domain = "hell.lucifer",
+                protocol = "ws"
+            ).toString()
+        ).isEqualTo("ws://hell.lucifer")
+
+
+        assertThat(
+            Api(
+                domain = "hell.lucifer",
+                protocol = "ws://"
+            ).toString()
+        ).isEqualTo("ws://hell.lucifer")
+    }
 
     @Test internal fun testBlankApiDomain() =
         assertThat(

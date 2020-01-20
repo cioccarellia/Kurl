@@ -36,7 +36,7 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
     val fragment: String
 ) {
     /**
-     * Returns the URL of the request
+     * Returns the URL representing the built request.
      * */
     fun get(): String = buildString {
         append(

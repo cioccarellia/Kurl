@@ -16,7 +16,7 @@
 package com.cioccarellia.kurl.constants
 
 /**
- * Constants set for Kurl
+ * Constants Set for Kurl.
  * */
 object KurlConstants {
     const val defaultProtocol = "https"

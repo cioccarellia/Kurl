@@ -23,7 +23,8 @@ import com.cioccarellia.kurl.compose.KurlComposable
  * An [API][Api] is the root web server URL, and an endpoint is
  * the string coming afterwards.
  *
- * Usually it is nested hierarchically and contains
+ * Usually it is nested hierarchically and contains just the
+ * path in association with a root [API][Api] and endpoints.
  * */
 class Endpoint(
     relativePath: String
@@ -31,35 +32,35 @@ class Endpoint(
     private var path: String = Composer.sanitize(relativePath)
 
     /**
-     * Since an endpoint is not aware of its position, nor its
-     * super/sub endpoints, it returns the local value
+     * Since an [endpoint][Endpoint] is not aware of its position, nor its
+     * super/sub endpoints, it returns the local value.
      * */
     override fun url() = path
     override fun toString() = path
 
     /**
-     * Chains two endpoints
+     * Chains two [endpoints][Endpoint].
      * */
     operator fun plus(other: KurlComposable): Endpoint {
         return Endpoint(Composer.compose(url(), other))
     }
 
     /**
-     * Chains the passed string to this endpoint
+     * Chains the passed string to this [endpoint][Endpoint].
      * */
     operator fun plus(other: String): String {
         return Composer.compose(this, other)
     }
 
     /**
-     * Joins two endpoints
+     * Joins two [endpoints][Endpoint].
      * */
     operator fun plusAssign(other: KurlComposable) {
         path = Composer.compose(url(), other)
     }
 
     /**
-     * Joins the passed string to this endpoint
+     * Joins the passed string to this [endpoint][Endpoint].
      * */
     operator fun plusAssign(other: String) {
         path = Composer.compose(url(), other)
