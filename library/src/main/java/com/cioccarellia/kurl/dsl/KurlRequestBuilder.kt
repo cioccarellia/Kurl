@@ -47,5 +47,18 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
         append(fragment)
     }
 
+    /**
+     * Checks if the passed [regex][Regex] matches the
+     * Kurl builder content.
+     * */
+    fun matches(regex: Regex) = check(get().matches(regex))
+
+
+    /**
+     * Checks if the passed string converted to [Regex] matches the
+     * Kurl builder content.
+     * */
+    fun matches(regex: String) = check(get().matches(regex.toRegex()))
+
     override fun toString() = get()
 }

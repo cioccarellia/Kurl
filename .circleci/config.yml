@@ -36,7 +36,7 @@ jobs:
                 path: ~/test-results/junit
             - run:
                 name: "Jacoco Test Report"
-                command: if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
+                command: ./gradlew jacocoTestReport
             - run:
                 name: "CodeCov"
                 command: bash <(curl -s https://codecov.io/bash)
