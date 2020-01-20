@@ -48,17 +48,38 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
     }
 
     /**
+     * Checks if the passed string, converted to [Regex],
+     * is contained inside the Kurl builder content.
+     * */
+    fun contains(
+        string: String,
+        ignoreCase: Boolean = false
+    ) = check(get().contains(string, ignoreCase))
+
+    /**
+     * Checks if the passed [regex][Regex] is contained inside the
+     * Kurl builder content.
+     * */
+    fun contains(
+        regex: Regex
+    ) = check(get().contains(regex))
+
+    /**
      * Checks if the passed [regex][Regex] matches the
      * Kurl builder content.
      * */
-    fun matches(regex: Regex) = check(get().matches(regex))
+    fun matches(
+        regex: Regex
+    ) = check(get().matches(regex))
 
 
     /**
-     * Checks if the passed string converted to [Regex] matches the
+     * Checks if the passed  matches the
      * Kurl builder content.
      * */
-    fun matches(regex: String) = check(get().matches(regex.toRegex()))
+    fun matches(
+        regex: String
+    ) = check(get().matches(regex.toRegex()))
 
     override fun toString() = get()
 }
