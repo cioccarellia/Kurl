@@ -16,6 +16,8 @@
 
 apply plugin: "java-library"
 apply plugin: "kotlin"
+apply plugin: "jacoco"
+
 apply from: rootProject.file("dependencies.gradle")
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -24,15 +26,15 @@ targetCompatibility = JavaVersion.VERSION_1_8
 apply from: rootProject.file('configure-maven-publish.gradle')
 
 dependencies {
-  api project(":library")
+	api project(":library")
 
-  api deps.kotlin.coroutines.core
-  implementation deps.kotlin.stdlib8
-  implementation deps.kotlin.reflection
-  implementation deps.gradle_plugins.okhttp
+	api deps.kotlin.coroutines.core
+	implementation deps.kotlin.stdlib8
+	implementation deps.kotlin.reflection
+	implementation deps.gradle_plugins.okhttp
 
-  testImplementation deps.kotlin.test.mockito
-  testImplementation deps.test.junit
-  testImplementation deps.test.mockito
-  testImplementation deps.test.truth
+	testImplementation deps.kotlin.test.mockito
+	testImplementation deps.test.junit
+	testImplementation deps.test.mockito
+	testImplementation deps.test.truth
 }
