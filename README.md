@@ -1,4 +1,4 @@
-# Kurl
+# Kurl - ⚠️ don't use this library until I'm gone :) ⚠️
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl/_latestVersion)
 [![CircleCI](https://circleci.com/gh/AndreaCioccarelli/Kurl/tree/master.svg?style=svg)](https://circleci.com/gh/AndreaCioccarelli/Kurl/tree/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d207f5ac27b4aed8276803b18c29115)](https://www.codacy.com/manual/cioccarellia/Kurl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreaCioccarelli/Kurl&amp;utm_campaign=Badge_Grade)
