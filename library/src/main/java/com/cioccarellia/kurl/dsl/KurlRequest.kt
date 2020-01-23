@@ -28,7 +28,7 @@ import com.cioccarellia.kurl.compose.Composer
  * All the processed fields are public and final, thus the exact representation
  * of what the real URL the calling software is referring to, in Kurl syntax.
  * */
-data class KurlRequestBuilder @PublishedApi internal constructor(
+data class KurlRequest @PublishedApi internal constructor(
     val api: Api,
     val endpoint: Endpoint,
     val urlParameters: UrlParameters,
@@ -38,7 +38,7 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
     /**
      * Returns the URL representing the built request.
      * */
-    fun get(): String = buildString {
+    fun url(): String = buildString {
         append(
             Composer.compose(api.url(), endpoint)
         )
@@ -54,7 +54,7 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
     fun contains(
         string: String,
         ignoreCase: Boolean = false
-    ) = check(get().contains(string, ignoreCase))
+    ) = check(url().contains(string, ignoreCase))
 
     /**
      * Checks if the passed [regex][Regex] is contained inside the
@@ -62,7 +62,8 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
      * */
     fun contains(
         regex: Regex
-    ) = check(get().contains(regex))
+    ) = check(url().contains(regex))
+
 
     /**
      * Checks if the passed [regex][Regex] matches the
@@ -70,8 +71,7 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
      * */
     fun matches(
         regex: Regex
-    ) = check(get().matches(regex))
-
+    ) = check(url().matches(regex))
 
     /**
      * Checks if the passed  matches the
@@ -79,7 +79,7 @@ data class KurlRequestBuilder @PublishedApi internal constructor(
      * */
     fun matches(
         regex: String
-    ) = check(get().matches(regex.toRegex()))
+    ) = check(url().matches(regex.toRegex()))
 
-    override fun toString() = get()
+    override fun toString() = url()
 }

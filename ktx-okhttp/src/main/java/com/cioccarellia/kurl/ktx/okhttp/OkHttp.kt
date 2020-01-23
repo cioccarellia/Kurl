@@ -18,7 +18,7 @@ package com.cioccarellia.kurl.ktx.okhttp
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.dsl.KurlRequestBuilder
+import com.cioccarellia.kurl.dsl.KurlRequest
 import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.emptyEndpoint
 import com.cioccarellia.kurl.ktx.okhttp.extensions.toOkHttpHeaders
@@ -42,7 +42,7 @@ fun Request.Builder.kurl(
     val request = com.cioccarellia.kurl.kurl(api, endpoint, block)
 
     request.let {
-        url(it.get())
+        url(it.url())
         headers(it.headers.toOkHttpHeaders())
     }
 
@@ -85,8 +85,8 @@ fun Request.Builder.kurl(
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is built into an OkHttp Request.
  *
- * @param       kurlBuilder The source Kurl builder
+ * @param       kurlRequest The source Kurl request
  * */
 fun Request.Builder.kurl(
-    kurlBuilder: KurlRequestBuilder
-): Request = kurl(kurlBuilder.api, kurlBuilder.endpoint).build()
+    kurlRequest: KurlRequest
+): Request = kurl(kurlRequest.api, kurlRequest.endpoint).build()

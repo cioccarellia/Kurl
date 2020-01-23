@@ -41,7 +41,7 @@ internal class KurlFunctionsTests {
         }
 
         assertThat(
-            userRequest.get()
+            userRequest.url()
         ).isEqualTo("htp://heaven.lucifer/v2/elevator/users/AndreaCioccarelli?id=23985725872&operation=4")
 
     }
@@ -52,7 +52,7 @@ internal class KurlFunctionsTests {
             endpoint("index.php")
 
             parameters("id" to "0")
-        }.get()
+        }.url()
 
         assertThat(
             url
@@ -62,7 +62,7 @@ internal class KurlFunctionsTests {
 
     @Test
     internal fun runDirectKurlLocalhost() {
-        val url = kurl("localhost") {}.get()
+        val url = kurl("localhost") {}.url()
 
         assertThat(
             url
@@ -75,7 +75,7 @@ internal class KurlFunctionsTests {
             endpoint("index.php")
 
             parameters("id" to 0)
-        }.get()
+        }.url()
 
         assertThat(
             url

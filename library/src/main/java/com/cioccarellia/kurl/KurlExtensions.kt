@@ -18,11 +18,11 @@ package com.cioccarellia.kurl
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
-import com.cioccarellia.kurl.dsl.KurlRequestBuilder
+import com.cioccarellia.kurl.dsl.KurlRequest
 import com.cioccarellia.kurl.dsl.KurlScope
 
 /**
- * Kurl extension function producing a [builder][KurlRequestBuilder] from an [API][Api].
+ * Kurl extension function producing a [builder][KurlRequest] from an [API][Api].
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
@@ -31,11 +31,11 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * */
 fun Api.kurl(
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlScope.() -> Unit
-): KurlRequestBuilder = kurl(this, endpoint = endpoint, block = block)
+    block: KurlScope.() -> Unit = {}
+): KurlRequest = kurl(this, endpoint = endpoint, block = block)
 
 /**
- * Kurl extension function producing a [builder][KurlRequestBuilder] from an [Api Container][KurlApiContainer].
+ * Kurl extension function producing a [builder][KurlRequest] from an [Api Container][KurlApiContainer].
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
@@ -44,5 +44,5 @@ fun Api.kurl(
  * */
 fun KurlApiContainer.kurl(
     endpoint: Endpoint = emptyEndpoint(),
-    block: KurlScope.() -> Unit
-): KurlRequestBuilder = kurl(api, endpoint = endpoint, block = block)
+    block: KurlScope.() -> Unit = {}
+): KurlRequest = kurl(api, endpoint = endpoint, block = block)

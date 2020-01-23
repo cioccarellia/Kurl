@@ -19,7 +19,7 @@ import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
 import com.cioccarellia.kurl.api.KurlApiContainer
 import com.cioccarellia.kurl.compose.Composer
-import com.cioccarellia.kurl.dsl.KurlRequestBuilder
+import com.cioccarellia.kurl.dsl.KurlRequest
 import com.cioccarellia.kurl.dsl.KurlScope
 import com.cioccarellia.kurl.emptyEndpoint
 import com.cioccarellia.kurl.ktx.ktor.extensions.toKtorProtocol
@@ -111,8 +111,8 @@ fun HttpRequestBuilder.kurl(
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is built into a [Ktor Request][HttpRequestData].
  *
- * @param       kurlBuilder The source Kurl builder
+ * @param       kurlRequest The source Kurl request
  * */
 fun HttpRequestBuilder.kurl(
-    kurlBuilder: KurlRequestBuilder
-): HttpRequestData = kurl(kurlBuilder.api, kurlBuilder.endpoint).build()
+    kurlRequest: KurlRequest
+): HttpRequestData = kurl(kurlRequest.api, kurlRequest.endpoint).build()

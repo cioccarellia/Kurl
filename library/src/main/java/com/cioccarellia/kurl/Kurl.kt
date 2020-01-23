@@ -18,11 +18,11 @@ package com.cioccarellia.kurl
 import com.cioccarellia.kurl.annotations.KurlLauncher
 import com.cioccarellia.kurl.api.Api
 import com.cioccarellia.kurl.api.Endpoint
-import com.cioccarellia.kurl.dsl.KurlRequestBuilder
+import com.cioccarellia.kurl.dsl.KurlRequest
 import com.cioccarellia.kurl.dsl.KurlScope
 
 /**
- * Kurl launch function producing a [builder][KurlRequestBuilder], to use for requests.
+ * Kurl launch function producing a [builder][KurlRequest], to use for requests.
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
@@ -31,15 +31,15 @@ import com.cioccarellia.kurl.dsl.KurlScope
  * @param       endpoint    The [endpoint][Endpoint] the request is routed to.
  * @param       block       Kurl DSL scope construction lambda.
  * */
-@KurlLauncher(impliesCheck = false)
+@KurlLauncher(autoCheck = false)
 fun kurl(
     api: Api,
     endpoint: Endpoint = emptyEndpoint(),
     block: KurlScope.() -> Unit = {}
-): KurlRequestBuilder = KurlScope(api, endpoint).apply { block() }.get()
+): KurlRequest = KurlScope(api, endpoint).apply { block() }.get()
 
 /**
- * Kurl launch function producing a [builder][KurlRequestBuilder], to use for requests.
+ * Kurl launch function producing a [builder][KurlRequest], to use for requests.
  * The passed lambda is applied to the Kurl construction [scope][KurlScope],
  * along with the supplied parameters, and the result is then returned.
  *
@@ -48,8 +48,8 @@ fun kurl(
  *                          the [endpoint][Endpoint] address.
  * @param       block       Kurl DSL scope construction lambda.
  * */
-@KurlLauncher(impliesCheck = false)
+@KurlLauncher(autoCheck = false)
 fun kurl(
     directUrl: String,
     block: KurlScope.() -> Unit
-): KurlRequestBuilder = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()
+): KurlRequest = KurlScope(Api.direct(directUrl), emptyEndpoint()).apply { block() }.get()

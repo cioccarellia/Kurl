@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package com.cioccarellia.kurl.annotations
 
-import com.cioccarellia.kurl.dsl.KurlScope
+package com.cioccarellia.kurl.ktx.ktor
+
+import com.cioccarellia.kurl.dsl.KurlRequest
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.HttpRequestData
 
 /**
- * Annotates a function capable of instantiating a
- * [Kurl scope][KurlScope].
- *
- * Those methods are defined as launch functions.
+ * Converts a [Kurl request][KurlRequest] into a [Ktor Request][HttpRequestData]
  * */
-@Target(AnnotationTarget.FUNCTION)
-@MustBeDocumented
-annotation class KurlLauncher(
-    val autoCheck: Boolean
-)
+fun KurlRequest.toKtorRequest(): HttpRequestData = HttpRequestBuilder().kurl(this)

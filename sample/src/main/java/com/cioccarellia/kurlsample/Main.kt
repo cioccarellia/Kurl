@@ -44,14 +44,14 @@ fun fetchUsingNamedAndExtensionApi() {
     fetchAndPrint(
         api.kurl {
             endpoint("users/$username/repos")
-        }.get()
+        }.url()
     )
 }
 
 fun fetchUsingInline() = runBlocking {
     val url = kurl("https://api.github.com") {
         endpoint("users/AndreaCioccarelli")
-    }.get()
+    }.url()
 
     println(url)
 
@@ -74,6 +74,6 @@ fun fetchUsingContainers() {
     fetchAndPrint(
         container
             .repoEndpoint(page = 1)
-            .get()
+            .url()
     )
 }

@@ -21,6 +21,15 @@ dependencies {
 }
 ```
 
+```xml
+<dependency>
+  <groupId>com.cioccarellia</groupId>
+  <artifactId>kurl</artifactId>
+  <version>$version</version>
+  <type>pom</type>
+</dependency>
+```
+
 ## Introduction
 If you have some backend interaction background, you can feel ok with skipping this part, it's just a technical brush up.
 
@@ -33,9 +42,9 @@ Generally, we can group them into 3 categories:
 ```html
 https://api.github.com/users/AndreaCioccarelli/repos/Kurl
 ```
- - Protocol: `https`
- - Domain: `api.github.com`
- - Web Path: `users/AndreaCioccarelli/repos/Kurl`
+- Protocol: `https`
+- Domain: `api.github.com`
+- Web Path: `users/AndreaCioccarelli/repos/Kurl`
 
 In the case above the root API url matches with the domain itself, but if we take:
 
@@ -46,11 +55,19 @@ https://swapi.co/api/people/3
 The general url composition will see `swapi.co` as the domain and `api/people/3` as it's web path, and this is correct, but to be precise, the root API url is `swapi.co/api` (Because it is where all the requests are dispatched to), and the endpoint we want to access is `people/1` (because it's the path we append to the API root to access our desired endpoint).
 
 ## Kurl Docs
-Kurl provides a DSL with a set of methods you can use to compose your backend/frontend interaction:
+Kurl provides a DSL with a set of methods you can use to compose your backend/frontend interaction.
 
-You can use a `kurl` launcher function to assemble your request. 
+You use a `kurl` launcher function to start composing your request. 
 The return type is `KurlRequest`.
 There are a bunch of functions and extensions you can use to do so, the most common are:
+
+```kotlin
+val r2d2Id = 3
+
+val request = kurl("https://swapi.co/api") {
+    endpoint("people/$r2d2Id")
+}
+```
 
 ```kotlin
 val r2d2Id = 3 // I hope you've watched Star Wars.
@@ -62,16 +79,12 @@ val api = Api(
 
 val people = Endpoint("people")
 
-val request = kurl(api, people) {
+val request1 = kurl(api, people) {
     endpoint("$r2d2Id")
 }
-```
 
-```kotlin
-val r2d2Id = 3
-
-val request = kurl("https://swapi.co/api") {
-    endpoint("people/$r2d2Id")
+val request2 = api.kurl(people) {
+    endpoint("$r2d2Id")
 }
 ```
 
@@ -81,7 +94,7 @@ Inside the lambda block you can invoke functions which will be used to compose t
 - `header()`: Sets a header value for a header key.
 - `fragment()`: Sets the fragment tag at the end of the url.
 
-Once the lambda has been executed a request object is retuned.
+Once the lambda has been executed a request object is returned.
 It contains all the finalized information needed to extract the required url, plus, additional useful methods for testing and checking the url correctness.
 
 This object can also be used alongside a **kurl-ktx** dependency for your HTTP client, to inject the request data inside the proper Request Builder.
@@ -102,9 +115,8 @@ Kurl is smart enough to infer and stick together the url you want to create even
 The default protocol is HTTPS. All other fields are optional.
 The only mandatory parameter is `domain`.
 
----
-
-_Directly_ creating an API instance means that you pass in the url using the `direct()` function and that's it. No smart insertion or completion is performed, the precise  exact string you type in is decomposed and used as the API root url.
+_Directly_ creating an API instance means that you pass in the url using the `direct()` function and that's it. 
+No smart insertion or completion is performed, the precise  exact string you type in is decomposed and used as the API root url.
 ```kotlin
 Api.direct("https://swapi.com/api")
 ```
@@ -116,23 +128,37 @@ Depending on the context, Kurl internally trims and concatenates different endpo
 The difference between an `Api` and an `Endpoint` is that the first one is unique, and the second one can be composed (You can stick together different endpoints to reach your target configuration).
 
 ### Containers
-You can make use of a `KurlApiContainer` to create a structured and specific API object, that will, scientifically talking, freaking improve your development experience.
-I'm probably gonna have to improve this section description.
+You can make use of a `KurlApiContainer` to create a structured and specific API object.
+This will group your app's API components in one place, instead of having them all scattered around your codebase.
 
 ```kotlin
 class StarWarsApiContainer : KurlApiContainer() {
 
     val api = Api(
         domain = "swapi.co",
-        path = "api"
+        path = "/api/"
+        // "api", "/api" and "api/" are ok too, Kurl will remove 
+        // and add any needed slash since we're doing things namely.
     )
 
-    // Extension function are cool
-    fun getPersonById(id: Into) = kurl {
+    val lukeUrl: KurlRequest
+        get() = kurl(
+            Endpoint("people/1")
+        )
+
+    fun getPersonById(id: Into): String = kurl {
         endpoint("people/$id")
     }.url()
+
+    fun getRandomStarship(): KurlRequest = kurl {
+        val rid = Random().nextInt(1, 9)
+        endpoint("starships/$rid")
+    }
 }
 ```
+Nice touches with a `KurlApiContainer` are:
+- You don't need to pass in an Api object every time you invoke `kurl`, it is automatically inferred by the context.
+- You can make use of inner classes to split in logical pieces your container
 
 # Kurl KTX
 The Kurl core package is designed to build kurl requests.
@@ -151,10 +177,28 @@ dependencies {
 }
 ```
 
+```xml
+<dependency>
+  <groupId>com.cioccarellia</groupId>
+  <artifactId>kurl-ktx-ktor</artifactId>
+  <version>$version</version>
+  <type>pom</type>
+</dependency>
+```
+
 ## OkHttp KTX 
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-okhttp:$version'
 }
+```
+
+```xml
+<dependency>
+  <groupId>com.cioccarellia</groupId>
+  <artifactId>kurl-ktx-okhttp</artifactId>
+  <version>$version</version>
+  <type>pom</type>
+</dependency>
 ```
