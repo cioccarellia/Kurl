@@ -10,12 +10,11 @@
 Kurl is a library that implements, structures, modularizes and provides testability for APIs implementations.
 It is designed to turn basic strings (and URLs) operations into consistent and idiomatic Kotlin code.
 
-Kurl is designed from the ground up to perform all the heavy work, leaving you with higher level abstraction and business logic.
-
+Kurl is designed from the ground up to perform all the heavy work, leaving you with higher level abstraction and logic.
 Kurl stands for Kotlin Url Repolishing Library. The name is inspired by [cUrl](https://curl.haxx.se).
 
 ## Setup
-Kurl is available for Desktop JVM and Android.
+Kurl is available on any JVM platform (Android, Desktop, Server).
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl:$version'
@@ -56,17 +55,17 @@ https://swapi.co/api/people/3
 The general url composition will see `swapi.co` as the domain and `api/people/3` as it's web path, and this is correct, but to be precise, the root API url is `swapi.co/api` (Because it is where all the requests are dispatched to), and the endpoint we want to access is `people/1` (because it's the path we append to the API root to access our desired endpoint).
 
 ## Kurl Docs
-Kurl provides a DSL with a set of methods you can use to compose your backend/frontend interaction.
+You use a `kurl` launcher function to start composing your request.
+Kurl provides a DSL with a set of methods to compose it.
 
-You use a `kurl` launcher function to start composing your request. 
-The return type is `KurlRequest`.
-There are a bunch of functions and extensions you can use to do so, the most common are:
+Its return type is `KurlRequest`.
+There are a bunch of functions and extensions you can invoke to start using Kurl:
 
 ```kotlin
-val r2d2Id = 3
+val id = 3
 
 val request = kurl("https://swapi.co/api") {
-    endpoint("people/$r2d2Id")
+    endpoint("people/$id")
 }
 ```
 
@@ -92,13 +91,13 @@ val request2 = api.kurl(people) {
 Inside the lambda block you can invoke functions which will be used to compose the final request.
 - `endpoint()`: Appends the passed string to the request url.
 - `parameters()`: Sets the passed key-value pairs as the URL query.
-- `header()`: Sets a header value for a header key.
+- `headers()`: Sets the header value for the header key for every entry you passed.
 - `fragment()`: Sets the fragment tag at the end of the url.
 
 Once the lambda has been executed a request object is returned.
-It contains all the finalized information needed to extract the required url, plus, additional useful methods for testing and checking the url correctness.
+It contains all the finalized information needed to extract the required url, plus, additional useful methods for testing and checking the url.
 
-This object can also be used alongside a **kurl-ktx** dependency for your HTTP client, to inject the request data inside the proper Request Builder.
+The core library can also be used alongside a **kurl-ktx** dependency for supported HTTP clients, in order to support a bunch of specific features and to reduce the code you need to write.
 
 ### Api
 An `Api` object describes a certain API root path.
@@ -167,8 +166,8 @@ If your client is supported by Kurl, you may consider including its specific KTX
 
 Each extension module contains the same exact features, adapted to the specific client syntax.
 - Kurl injection on request builders.
-- Conversion from Kurl requests to client requests
-- Library agnostic type conversion & support
+- Conversion from Kurl requests to client specific requests.
+- Library agnostic type conversion & support.
 
 ## Ktor KTX 
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
