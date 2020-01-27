@@ -28,7 +28,6 @@ apply from: rootProject.file('configure-maven-publish.gradle')
 dependencies {
 	api deps.kotlin.coroutines.core
 	implementation deps.kotlin.stdlib8
-	implementation deps.kotlin.reflection
 
 	testImplementation deps.kotlin.test.mockito
 	testImplementation deps.test.junit

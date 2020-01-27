@@ -29,7 +29,6 @@ dependencies {
 	api project(":library")
 	api deps.kotlin.coroutines.core
 	implementation deps.kotlin.stdlib8
-	implementation deps.kotlin.reflection
 
 	implementation deps.gradle_plugins.ktor_client
 	implementation deps.gradle_plugins.ktor_engine_apache
