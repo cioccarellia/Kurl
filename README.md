@@ -170,7 +170,7 @@ Each extension module contains the same exact features, adapted to the specific 
 - Library agnostic type conversion & support.
 
 ## Ktor KTX 
-[![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
+[![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-ktor/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-ktor:$version'
@@ -187,7 +187,7 @@ dependencies {
 ```
 
 ## OkHttp KTX 
-[![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
+[![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-okhttp/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-okhttp:$version'
