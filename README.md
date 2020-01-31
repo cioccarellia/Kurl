@@ -4,7 +4,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d207f5ac27b4aed8276803b18c29115)](https://www.codacy.com/manual/cioccarellia/Kurl?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreaCioccarelli/Kurl&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/AndreaCioccarelli/Kurl/branch/master/graph/badge.svg)](https://codecov.io/gh/AndreaCioccarelli/Kurl)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kurl-green.svg?style=flat)](https://android-arsenal.com/details/1/8031)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-orange.svg?style=flat)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-orange.svg?style=flat)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Kurl is a library that implements, structures, modularizes and provides testability for backend APIs implementations.
@@ -169,8 +169,9 @@ Each extension module contains the same exact features, adapted to the specific 
 - Conversion from Kurl requests to client specific requests.
 - Library agnostic type conversion & support.
 
-## Ktor KTX 
+## Ktor KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-ktor/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
+[![Ktor](https://img.shields.io/badge/Ktor-1.3.0-purple.svg?style=flat)](https://ktor.io)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-ktor:$version'
@@ -186,8 +187,11 @@ dependencies {
 </dependency>
 ```
 
-## OkHttp KTX 
+## OkHttp KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-okhttp/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
+
+
+[![OkHttp](https://img.shields.io/badge/OkHttp-4.3.1-purple.svg?style=flat)](https://square.github.com/okhttp/)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-okhttp:$version'
