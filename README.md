@@ -39,7 +39,7 @@ To create software which is capable of accessing a minimally structured API you 
 An URL is composed by several parts. 
 Generally, we can group them into 3 categories:
 
-```html
+```
 https://api.github.com/users/AndreaCioccarelli/repos/Kurl
 ```
 - Protocol: `https`
@@ -48,7 +48,7 @@ https://api.github.com/users/AndreaCioccarelli/repos/Kurl
 
 In the case above the root API url matches with the domain itself, but if we take:
 
-```html
+```
 https://swapi.co/api/people/3
 ```
 
@@ -56,9 +56,9 @@ The general url composition will see `swapi.co` as the domain and `api/people/3`
 
 ## Kurl Docs
 You use a `kurl` launcher function to start composing your request.
-Kurl provides a DSL with a set of methods to compose it.
+Kurl provides a DSL with a set of methods to shape it up.
 
-Its return type is `KurlRequest`.
+It returns an object of `KurlRequest` type.
 There are a bunch of functions and extensions you can invoke to start using Kurl:
 
 ```kotlin
@@ -70,7 +70,7 @@ val request = kurl("https://swapi.co/api") {
 ```
 
 ```kotlin
-val r2d2Id = 3 // I hope you've watched Star Wars.
+val r2d2Id = 3
 
 val api = Api(
     domain = "swapi.co",
@@ -78,6 +78,7 @@ val api = Api(
 )
 
 val people = Endpoint("people")
+
 
 val request1 = kurl(api, people) {
     endpoint("$r2d2Id")
