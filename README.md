@@ -31,7 +31,7 @@ dependencies {
 ```
 
 ## Introduction
-If you have some backend interaction background, you can feel ok with skipping this part, it's just a technical brush up.
+If you have some backend interaction background, you can feel ok with skipping this part, it's just a technical brush up to make sure we're all on the same page.
 
 An API url is _where_ the server hosts the service you use.
 To create software which is capable of accessing a minimally structured API you have to know the API url and the scheme used by the server.
