@@ -7,11 +7,11 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.61-orange.svg?style=flat)](http://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-Kurl is a library that implements, structures, modularizes and provides testability for APIs implementations.
+Kurl is a library that implements, structures, modularizes and provides testability for backend APIs implementations.
 It is designed to turn basic strings (and URLs) operations into consistent and idiomatic Kotlin code.
 
-Kurl is designed from the ground up to perform all the heavy work, leaving you with higher level abstraction and logic.
-Kurl stands for Kotlin Url Repolishing Library. The name is inspired by [cUrl](https://curl.haxx.se).
+Kurl is designed from the ground up to perform all the heavy and error-prone work, leaving you with higher level abstraction and logic.
+Kurl stands for _Kotlin Url Repolishing Library_. The name is inspired by [cUrl](https://curl.haxx.se).
 
 ## Setup
 Kurl is available on any JVM platform (Android, Desktop, Server).
