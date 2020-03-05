@@ -190,7 +190,7 @@ dependencies {
 
 ## OkHttp KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-okhttp/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
-[![OkHttp](https://img.shields.io/badge/OkHttp-4.3.1-purple.svg?style=flat)](https://square.github.com/okhttp/)
+[![OkHttp](https://img.shields.io/badge/OkHttp-4.4.0-purple.svg?style=flat)](https://square.github.com/okhttp/)
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-okhttp:$version'
