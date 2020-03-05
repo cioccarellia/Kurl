@@ -28,7 +28,7 @@ ext.deps = [
         ktor_server: "io.ktor:ktor-server-core:${versions.ktorVersion}",
         ktor_client: "io.ktor:ktor-client-core:${versions.ktorVersion}",
         ktor_engine_apache: "io.ktor:ktor-client-apache:${versions.ktorVersion}",
-        okhttp: "com.squareup.okhttp3:okhttp:4.3.1",
+        okhttp: "com.squareup.okhttp3:okhttp:4.4.0",
         retrofit: "com.squareup.retrofit2:retrofit:2.7.1"
     ],
 
