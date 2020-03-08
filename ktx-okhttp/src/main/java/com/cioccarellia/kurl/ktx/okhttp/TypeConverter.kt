@@ -22,4 +22,4 @@ import okhttp3.Request
 /**
  * Converts a [Kurl request][KurlRequest] into an [OkHttp Request][Request]
  * */
-fun KurlRequest.toOkHttpRequest(): Request = Request.Builder().kurl(this)
+fun KurlRequest.toOkHttpRequest(): Request = Request.Builder().url(url()).build()

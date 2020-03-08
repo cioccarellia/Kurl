@@ -19,8 +19,9 @@ package com.cioccarellia.kurl.ktx.ktor
 import com.cioccarellia.kurl.dsl.KurlRequest
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.HttpRequestData
+import io.ktor.client.request.url
 
 /**
  * Converts a [Kurl request][KurlRequest] into a [Ktor Request][HttpRequestData]
  * */
-fun KurlRequest.toKtorRequest(): HttpRequestData = HttpRequestBuilder().kurl(this)
+fun KurlRequest.toKtorRequest(): HttpRequestData = HttpRequestBuilder().apply { url(this@toKtorRequest.url()) }.build()
