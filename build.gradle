@@ -18,39 +18,39 @@ apply from: rootProject.file("versions_plugin_config.gradle")
 apply from: rootProject.file("dokka.gradle")
 
 buildscript {
-    apply from: rootProject.file("dependencies.gradle")
+	apply from: rootProject.file("dependencies.gradle")
 
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url 'https://dl.bintray.com/kotlin/kotlin-eap'
-        }
+	repositories {
+		google()
+		mavenCentral()
+		maven {
+			url 'https://dl.bintray.com/kotlin/kotlin-eap'
+		}
 
-        jcenter()
-    }
+		jcenter()
+	}
 
-    dependencies {
-        classpath deps.gradle_plugins.kotlin
-        classpath deps.gradle_plugins.versions
-        classpath deps.gradle_plugins.maven_publish
+	dependencies {
+		classpath deps.gradle_plugins.kotlin
+		classpath deps.gradle_plugins.versions
+		classpath deps.gradle_plugins.maven_publish
 
-        classpath deps.kotlin.dokka
-    }
+		classpath deps.kotlin.dokka
+	}
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
-    }
+	repositories {
+		google()
+		mavenCentral()
+		jcenter()
+	}
 }
 
 subprojects {
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            freeCompilerArgs += ['-module-name', project.path.replace(':', '')]
-        }
-    }
+	tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+		kotlinOptions {
+			freeCompilerArgs += ['-module-name', project.path.replace(':', '')]
+		}
+	}
 }
