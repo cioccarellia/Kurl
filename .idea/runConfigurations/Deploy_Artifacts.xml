@@ -4,7 +4,7 @@
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$/library" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="clean build test uploadArtifacts --no-parallel --no-daemon" />
+      <option name="scriptParameters" value="clean build test uploadArchives --no-parallel" />
       <option name="taskDescriptions">
         <list />
       </option>

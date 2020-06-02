@@ -24,7 +24,7 @@ import kotlinx.coroutines.runBlocking
 
 private val client = HttpClient()
 
-private fun fetchAndPrint(url: String) = runBlocking {
+private fun fetchAndPrintURL(url: String) = runBlocking {
     println(client.get<String>(url))
 }
 
@@ -41,7 +41,7 @@ fun fetchUsingNamedAndExtensionApi() {
 
     val username = "AndreaCioccarelli"
 
-    fetchAndPrint(
+    fetchAndPrintURL(
         api.kurl {
             endpoint("users/$username/repos")
         }.url()
@@ -71,7 +71,7 @@ fun fetchUsingContainers() {
     val username = "AndreaCioccarelli"
     val container = GithubApiContainer(username)
 
-    fetchAndPrint(
+    fetchAndPrintURL(
         container
             .repoEndpoint(page = 1)
             .url()
