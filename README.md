@@ -15,6 +15,8 @@ Kurl stands for _Kotlin Url Repolishing Library_. The name is inspired by [cUrl]
 
 ## Setup
 Kurl is available on any JVM-targeted platform (Android, Desktop, Server).
+#### Add dependency
+
 <details open><summary>Gradle</summary>
 
 ```gradle
@@ -28,13 +30,14 @@ dependencies {
 
 ```xml
 <dependency>
-  <groupId>com.cioccarellia</groupId>
-  <artifactId>kurl</artifactId>
-  <version>1.0.4</version>
-  <type>pom</type>
+    <groupId>com.cioccarellia</groupId>
+    <artifactId>kurl</artifactId>
+    <version>1.0.4</version>
+    <type>pom</type>
 </dependency>
 ```
-</summary>
+</details>
+
 
 ## Introduction
 If you have some backend interaction background, you can feel ok with skipping this part, it's just a technical brush up to make sure we're all on the same page.
@@ -180,8 +183,10 @@ Each extension module contains the same exact features, adapted to the specific 
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-ktor/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
 [![Ktor](https://img.shields.io/badge/Ktor-1.5.0-purple.svg?style=flat)](https://ktor.io)
 
+
 <details open><summary>Gradle</summary>
-```kotlin
+
+```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-ktor:1.0.4'
 }
@@ -189,6 +194,7 @@ dependencies {
 </details>
 
 <details><summary>Maven</summary>
+
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
@@ -197,13 +203,16 @@ dependencies {
   <type>pom</type>
 </dependency>
 ```
+</details>
+
 
 ## OkHttp KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-okhttp/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
 [![OkHttp](https://img.shields.io/badge/OkHttp-4.9.0-purple.svg?style=flat)](https://square.github.com/okhttp/)
 
 <details open><summary>Gradle</summary>
-```kotlin
+
+```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl-ktx-okhttp:1.0.4'
 }
@@ -211,6 +220,7 @@ dependencies {
 </details>
 
 <details><summary>Maven</summary>
+
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
@@ -219,45 +229,4 @@ dependencies {
   <type>pom</type>
 </dependency>
 ```
-</details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<details open><summary>Gradle</summary>
-
-	```kotlin
-	dependencies {
-	    implementation("it.skrape:skrapeit-core:1.0.0-alpha8")
-	}
-	```
-</details>
-
-<details><summary>Maven</summary>
-
-	```xml
-	<dependency>
-	    <groupId>it.skrape</groupId>
-	    <artifactId>skrapeit-core</artifactId>
-	    <version>1.0.0-alpha8</version>
-	</dependency>
-	```
 </details>
