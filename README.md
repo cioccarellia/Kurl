@@ -16,6 +16,7 @@ Kurl stands for _Kotlin Url Repolishing Library_. The name is inspired by [cUrl]
 ## Setup
 Kurl is available on any JVM-targeted platform (Android, Desktop, Server).
 <details open><summary>Gradle</summary>
+
 ```gradle
 dependencies {
     implementation 'com.cioccarellia:kurl:1.0.4'
@@ -24,6 +25,7 @@ dependencies {
 </details>
 
 <details><summary>Maven</summary>
+
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
@@ -32,6 +34,7 @@ dependencies {
   <type>pom</type>
 </dependency>
 ```
+</summary>
 
 ## Introduction
 If you have some backend interaction background, you can feel ok with skipping this part, it's just a technical brush up to make sure we're all on the same page.
