@@ -14,18 +14,21 @@ Kurl is designed from the ground up to perform all the heavy and error-prone wor
 Kurl stands for _Kotlin Url Repolishing Library_. The name is inspired by [cUrl](https://curl.haxx.se).
 
 ## Setup
-Kurl is available on any JVM platform (Android, Desktop, Server).
+Kurl is available on any JVM-targeted platform (Android, Desktop, Server).
+<details open><summary>Gradle</summary>
 ```gradle
 dependencies {
-    implementation 'com.cioccarellia:kurl:$version'
+    implementation 'com.cioccarellia:kurl:1.0.4'
 }
 ```
+</details>
 
+<details><summary>Maven</summary>
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
   <artifactId>kurl</artifactId>
-  <version>$version</version>
+  <version>1.0.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -172,36 +175,86 @@ Each extension module contains the same exact features, adapted to the specific 
 
 ## Ktor KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-ktor/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-ktor/_latestVersion)
-[![Ktor](https://img.shields.io/badge/Ktor-1.3.0-purple.svg?style=flat)](https://ktor.io)
-```gradle
+[![Ktor](https://img.shields.io/badge/Ktor-1.5.0-purple.svg?style=flat)](https://ktor.io)
+
+<details open><summary>Gradle</summary>
+```kotlin
 dependencies {
-    implementation 'com.cioccarellia:kurl-ktx-ktor:$version'
+    implementation 'com.cioccarellia:kurl-ktx-ktor:1.0.4'
 }
 ```
+</details>
 
+<details><summary>Maven</summary>
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
   <artifactId>kurl-ktx-ktor</artifactId>
-  <version>$version</version>
+  <version>1.0.4</version>
   <type>pom</type>
 </dependency>
 ```
 
 ## OkHttp KTX
 [![Download](https://api.bintray.com/packages/cioccarellia/kurl/kurl-ktx-okhttp/images/download.svg)](https://bintray.com/cioccarellia/kurl/kurl-ktx-okhttp/_latestVersion)
-[![OkHttp](https://img.shields.io/badge/OkHttp-4.4.0-purple.svg?style=flat)](https://square.github.com/okhttp/)
-```gradle
+[![OkHttp](https://img.shields.io/badge/OkHttp-4.9.0-purple.svg?style=flat)](https://square.github.com/okhttp/)
+
+<details open><summary>Gradle</summary>
+```kotlin
 dependencies {
-    implementation 'com.cioccarellia:kurl-ktx-okhttp:$version'
+    implementation 'com.cioccarellia:kurl-ktx-okhttp:1.0.4'
 }
 ```
+</details>
 
+<details><summary>Maven</summary>
 ```xml
 <dependency>
   <groupId>com.cioccarellia</groupId>
   <artifactId>kurl-ktx-okhttp</artifactId>
-  <version>$version</version>
+  <version>1.0.4</version>
   <type>pom</type>
 </dependency>
 ```
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details open><summary>Gradle</summary>
+
+	```kotlin
+	dependencies {
+	    implementation("it.skrape:skrapeit-core:1.0.0-alpha8")
+	}
+	```
+</details>
+
+<details><summary>Maven</summary>
+
+	```xml
+	<dependency>
+	    <groupId>it.skrape</groupId>
+	    <artifactId>skrapeit-core</artifactId>
+	    <version>1.0.0-alpha8</version>
+	</dependency>
+	```
+</details>
